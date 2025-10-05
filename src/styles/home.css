@@ -1,0 +1,52 @@
+.mainContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-image: url('../assets/logo3_2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.card{
+    width: 15rem;
+    height: fit-content;
+    margin: 20px;
+    display: flex;
+    border: 2px solid ;
+    border-radius: 5px;
+}
+
+.card button {
+    width: 100%;
+}
+
+#cardGym {
+    border: 2px solid red;
+}
+
+#btnCardGym {
+    background-color: white;
+    border-color: red;
+    color: red;
+    font-size: larger;
+    font-weight: 900;
+}
+
+.card-title, .card-text {
+    color: aliceblue;
+}
+
+@media (max-width: 768px){
+    .card{
+        width: 80%;
+    }
+    .navbar-toggler {
+        background-color: white;
+    }
+    .navbar-toggler-icon{
+        background-color: white;
+    }
+}

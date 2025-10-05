@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+#principalContainer {
+  display: flex;
+  min-height: 100vh;
+  background-image: url('../public/logoEIA.jpg');
+}
+
+#principalForm {
+  border: 2px solid aquamarine;
+  color: aliceblue;
+  width: 50vw;
+  padding: 10px;
+  margin: 10px;
+}
+
+#principalRespuesta {
+  border: 2px solid aqua;
+  width: 50vw;
+  margin: 10px;
+  color: aliceblue;
+}
+
+#recomendacionesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  #principalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #principalForm,
+  #principalRespuesta {
+    width: 90%;
+  }
+
+  #recomendacionesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

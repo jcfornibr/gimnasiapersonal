@@ -1,0 +1,16 @@
+#footerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 2px solid gray;
+    padding: 5px;
+}
+
+#recomendacionesContainer {
+    border-bottom: 2px solid gray;
+}
+
+#legalContainer{
+    color: aliceblue;
+    text-align: center;
+}

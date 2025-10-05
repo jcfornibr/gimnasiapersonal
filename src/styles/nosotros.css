@@ -1,0 +1,15 @@
+.textContainer{
+    background-color: rgba(240, 237, 234, 0.7);
+    width: 75%;
+    padding: 10px;
+    margin: 2%;
+    border-radius: 10px;
+    border: 2px orangered solid;
+}
+
+.textContainer p{
+    color: orangered;
+    background-color: rgba(0,0,0,0);    
+    font-size:xx-large;
+    font-weight: 500;
+}
