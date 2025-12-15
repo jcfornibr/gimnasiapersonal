@@ -36,7 +36,7 @@ export const GymExercise = () => {
     <>
       <div id='principalContainer'>
         <Form onSubmit={presion} id="principalForm">
-          <Form.Label>Rutina de ejercicios físicos</Form.Label>
+          <Form.Label>Rutina de ejercicios físicos</Form.Label><br/>
           <Form.Label>Datos del/la alumno/a</Form.Label>
           <hr />
           <div id='inputsContainer'>
@@ -46,7 +46,7 @@ export const GymExercise = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="sexo">
               <Form.Label>Sexo</Form.Label>
-              <Form.Select aria-label="Default select example">
+              <Form.Select aria-label="Default select example" className='selectsRutina'>
                 <option>Seleccione el sexo:</option>
                 <option value="hombre">Hombre</option>
                 <option value="mujer">Mujer</option>
@@ -66,7 +66,7 @@ export const GymExercise = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="nivel">
               <Form.Label>Nivel de entrenamiento</Form.Label>
-              <Form.Select aria-label="Default select example">
+              <Form.Select aria-label="Default select example" className='selectsRutina'>
                 <option>Seleccione el nivel:</option>
                 <option value="novato">Novato</option>
                 <option value="intermedio">Intermedio</option>
@@ -79,7 +79,7 @@ export const GymExercise = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="aparatos">
               <Form.Label>Con/Sin Aparatos</Form.Label>
-              <Form.Select aria-label="Default select example">
+              <Form.Select aria-label="Default select example" className='selectsRutina'>
                 <option>Seleccione Con o Sin aparatos:</option>
                 <option value="con">Con</option>
                 <option value="sin">Sin</option>
