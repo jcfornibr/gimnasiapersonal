@@ -14,6 +14,18 @@
   margin: 10px;
 }
 
+#inputsContainer {
+    padding: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.mb-3 {
+    width: 45%;
+}
+
 #principalRespuesta {
   border: 2px solid orange;
   width: 50vw;

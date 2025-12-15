@@ -1,13 +1,12 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Button } from 'react-bootstrap';
 import '../styles/header.css'
 
-export const NavigateApp = () => {
+export const NavigateApp = ({logIn, logOut, auth}) => {
   return (
     <Navbar expand="lg" className="header">
       <Container className='headerContainer'>
-        <Navbar.Brand href="/">Exercitame Iá!</Navbar.Brand>
+        <Navbar.Brand href="/">Entrename IÁ!</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -17,7 +16,13 @@ export const NavigateApp = () => {
             </NavDropdown>
             <NavLink to='/nosotros'>Nosotros</NavLink>
             <NavLink to='/contacto'>Contacto</NavLink>
+            {
+              auth && (<NavLink to='/admin'>Admin</NavLink>)
+            }
           </Nav>
+          <Button variant="info" onClick={() => auth ? logOut() : logIn()}>
+            {auth ? 'Log Out' : 'Log In'}
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
