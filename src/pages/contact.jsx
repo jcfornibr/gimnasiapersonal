@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { Form, Button } from 'react-bootstrap';
 import '../styles/contact.css'
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -31,22 +30,22 @@ export const Contact = () => {
 
   return (
     <div className='mainContainer'>
-      <Form ref={form} onSubmit={sendEmail} className='formContacto'>
-        <Form.Group className="mb-3 formGroup" controlId="name">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control type="text" name="name" placeholder="Ingrese su nombre..." />
-        </Form.Group>
-        <Form.Group className="mb-3 formGroup" controlId="email" >
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Ingrese su email..." name="email" />
-        </Form.Group>
-        <Form.Group className="mb-3 formGroup" controlId="message" >
-          <Form.Label>Mensaje</Form.Label>
-          <Form.Control as="textarea" rows={3} name="message" placeholder="Ingrese su mensaje o consulta..." />
-        </Form.Group>
+      <form ref={form} onSubmit={sendEmail} className='formContacto'>
+        <div className="mb-3 formGroup">
+          <label htmlFor="name" className="block text-sm font-medium mb-2">Nombre</label>
+          <input type="text" name="name" id="name" placeholder="Ingrese su nombre..." className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div className="mb-3 formGroup">
+          <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+          <input type="email" name="email" id="email" placeholder="Ingrese su email..." className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div className="mb-3 formGroup">
+          <label htmlFor="message" className="block text-sm font-medium mb-2">Mensaje</label>
+          <textarea rows={3} name="message" id="message" placeholder="Ingrese su mensaje o consulta..." className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
 
-        <Button variant="primary" type="submit">Enviar</Button>
-      </Form>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Enviar</button>
+      </form>
     </div>
   );
 };
