@@ -1,116 +1,138 @@
-import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import '../styles/header.css';
+import { FaAngleDown } from "react-icons/fa";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
 
-export const NavigateApp = ({ logIn, logOut, auth }) => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+export function NavigateApp({ auth, logIn, logOut }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <nav className="bg-red-600 text-white">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="flex h-16 items-center justify-between">
-          
-          {/* Brand */}
-          <NavLink
-            to="/"
-            className="text-xl font-bold text-cyan-400 hover:text-cyan-300"
-          >
-            Entrename IÁ!
-          </NavLink>
+    <nav className="bg-onix fixed w-full z-20 top-0 border-b border-default shadow-lg">
+      <div className="max-w-7xl flex items-center justify-between mx-auto px-4 py-3 md:py-4">
 
-          {/* Mobile menu button */}
+        {/* Logo */}
+        <NavLink
+          to="/"
+          className="flex items-center space-x-3"
+        >
+          <span className="text-white self-center text-xl font-bold whitespace-nowrap">
+            Entrename IÁ!
+          </span>
+        </NavLink>
+
+        {/* Derecha */}
+        <div className="flex md:order-2 items-center space-x-2 md:space-x-3">
+          {/* Boton login desktop */}
           <button
-            className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-slate-800"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => (auth ? logOut() : logIn())}
+            className="hidden md:flex bg-white items-center text-gray-700 font-bold justify-center gap-x-2 text-sm lg:text-base rounded-lg hover:bg-gray-100 duration-300 transition-colors border px-6 lg:px-8 py-2.5 cursor-pointer"
           >
-            ☰
+            {auth ? "Log Out" : "Log In"}
           </button>
 
-          {/* Desktop menu */}
-          <div className="hidden lg:flex lg:items-center lg:gap-6">
-            <NavLink to="/" className="hover:text-cyan-300 font-bold">
-              Inicio
-            </NavLink>
+          {/* Boton hamburguesa mobile */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-white text-2xl rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 transition-all"
+          >
+            <span className="sr-only">{menuOpen ? "Cerrar menú" : "Abrir menú"}</span>
+            {menuOpen ? <HiX /> : <HiMenuAlt3 />}
+          </button>
+        </div>
+
+        {/* Menu */}
+        <div
+          className={`${
+            menuOpen ? "flex" : "hidden"
+          } absolute md:relative top-full left-0 w-full md:w-auto md:flex md:order-1 bg-onix md:bg-transparent border-t md:border-t-0 border-gray-700`}
+        >
+          <ul className="flex flex-col md:flex-row md:space-x-6 lg:space-x-8 w-full md:w-auto p-4 md:p-0 font-medium">
+
+            <li>
+              <NavLink
+                to="/"
+                className="block text-white py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-gray-300 transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Inicio
+              </NavLink>
+            </li>
 
             {/* Dropdown */}
-            <div className="relative">
+            <li className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="hover:text-cyan-300"
+                className="flex text-white items-center w-full py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-gray-300 cursor-pointer transition-colors"
               >
-                Temáticas
+                Temáticas <FaAngleDown className={`ml-1 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {dropdownOpen && (
-                <div className="absolute left-0 mt-2 w-56 rounded-md bg-white text-slate-900 shadow-lg">
+                <div className="md:absolute relative z-10 md:mt-2 w-full md:w-56  bg-white text-slate-900 shadow-lg">
                   <NavLink
                     to="/gymexercise"
-                    className="block px-4 py-2 hover:bg-slate-100"
-                    onClick={() => setDropdownOpen(false)}
+                    className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={() => {
+                      setDropdownOpen(false);
+                      setMenuOpen(false);
+                    }}
                   >
                     Entrenamiento Personal
                   </NavLink>
                 </div>
               )}
-            </div>
+            </li>
 
-            <NavLink to="/nosotros" className="hover:text-cyan-300">
-              Nosotros
-            </NavLink>
+            <li>
+              <NavLink
+                to="/nosotros"
+                className="block text-white py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-gray-300 transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Nosotros
+              </NavLink>
+            </li>
 
-            <NavLink to="/contacto" className="hover:text-cyan-300">
-              Contacto
-            </NavLink>
+            <li>
+              <NavLink
+                to="/contacto"
+                className="block text-white py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-gray-300 transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Contacto
+              </NavLink>
+            </li>
 
             {auth && (
-              <NavLink to="/admin" className="hover:text-cyan-300">
-                Admin
-              </NavLink>
+              <li>
+                <NavLink
+                  to="/admin"
+                  className="block text-white py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-gray-300 transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Admin
+                </NavLink>
+              </li>
             )}
 
-            <button
-              onClick={() => (auth ? logOut() : logIn())}
-              className="rounded-md bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-cyan-400"
-            >
-              {auth ? 'Log Out' : 'Log In'}
-            </button>
-          </div>
+            {/* Boton login mobile */}
+            <li className="md:hidden border-t border-gray-700 pt-4 mt-2">
+              <button
+                onClick={() => {
+                  auth ? logOut() : logIn();
+                  setMenuOpen(false);
+                }}
+                className="w-full bg-white flex items-center text-gray-700 font-bold justify-center gap-x-2 text-sm rounded-lg hover:bg-gray-100 duration-300 transition-colors border px-4 py-2.5 cursor-pointer"
+              >
+                {auth ? "Log Out" : "Log In"}
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="lg:hidden bg-slate-800 px-4 pb-4 space-y-2">
-          <NavLink to="/" className="block hover:text-cyan-300">
-            Inicio
-          </NavLink>
-
-          <NavLink to="/gymexercise" className="block hover:text-cyan-300">
-            Entrenamiento Personal
-          </NavLink>
-
-          <NavLink to="/nosotros" className="block hover:text-cyan-300">
-            Nosotros
-          </NavLink>
-
-          <NavLink to="/contacto" className="block hover:text-cyan-300">
-            Contacto
-          </NavLink>
-
-          {auth && (
-            <NavLink to="/admin" className="block hover:text-cyan-300">
-              Admin
-            </NavLink>
-          )}
-
-          <button
-            onClick={() => (auth ? logOut() : logIn())}
-            className="w-full rounded-md bg-cyan-500 px-4 py-2 font-semibold text-slate-900 hover:bg-cyan-400"
-          >
-            {auth ? 'Log Out' : 'Log In'}
-          </button>
-        </div>
-      )}
     </nav>
-  )
+  );
 }
