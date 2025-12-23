@@ -7,21 +7,28 @@ export const HomePage = () => {
   return (
     <>
     <div className='mainContainer'>
-      <div id='cardGym' className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <img src={entrenamiento} alt="Entrenamiento" className="w-full h-auto" />
-        <div className="p-6">
-          <h5 className="text-xl font-bold mb-3">Personal Trainer</h5>
-          <p className="text-gray-700 mb-4">
-            Obten ejercicios para realizar donde te sientas cómo.
-            Recuerda que debes seguir las instrucciones de la mejor manera.
-            ¡Y siempre, consulta con un profesor en persona!
+      <div className="bg-onix block max-w-md p-8 md:p-10 rounded-lg shadow-xl transition-all duration-300 hover:shadow-2xl">
+        <img className="rounded-lg w-full h-auto shadow-lg mb-6" src={entrenamiento} alt="Entrenamiento" />
+        
+        <h5 className="mb-4 text-3xl md:text-4xl font-bold tracking-tight text-white text-center">
+          Personal Trainer
+        </h5>
+        
+        <div className="mb-8 space-y-3 text-gray-200 text-lg leading-relaxed">
+          <p>
+            <span className="text-white font-semibold">Obtené ejercicios personalizados</span> para realizar donde te sientas cómodo.
           </p>
-          <NavLink to='/gymexercise'>
-            <button id='btnCardGym' className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-              Entrene IA!
-            </button>
-          </NavLink>
+          <p>
+            Recordá que debés seguir las instrucciones de la mejor manera para <span className="text-white font-semibold">resultados óptimos</span>.
+          </p>
+          <p className="text-yellow-300 font-medium">
+            ¡Y siempre, consultá con un profesor en persona!
+          </p>
         </div>
+        
+        <NavLink to='/gymexercise' className="inline-flex w-full justify-center items-center text-gray-200 bg-red-700 hover:bg-red-800 shadow-lg hover:shadow-xl font-bold leading-5 rounded-lg text-base px-6 py-3.5 focus:outline-none transition-all duration-200 transform ">
+          Entrene IA!
+        </NavLink>
       </div>
     </div>
     

@@ -1,15 +1,16 @@
-.textContainer{
-    background-color: rgba(240, 237, 234, 0.7);
-    width: 75%;
-    padding: 10px;
-    margin: 2%;
-    border-radius: 10px;
-    border: 2px orangered solid;
+.mainContainer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-image: url("../assets/hero-gym.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
-.textContainer p{
-    color: orangered;
-    background-color: rgba(0,0,0,0);    
-    font-size:xx-large;
-    font-weight: 500;
+.bg-onix {
+  background-color: #121113;
 }

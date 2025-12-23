@@ -39,7 +39,7 @@ export const FooterComponent = () => {
                         Derechos reservados - 2025
                     </p>
                     <p className='text-sm md:text-base'>
-                        Desarrollado por <a href="" className='text-green-500 hover:text-green-400 hover:underline transition-colors'>GCoding IT</a>
+                        Desarrollado por <a href="" className='text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-600 hover:underline transition-colors'>GCoding IT</a>
                     </p>
                 </section>
             </div>

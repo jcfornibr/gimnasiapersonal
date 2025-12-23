@@ -30,22 +30,55 @@ export const Contact = () => {
 
   return (
     <div className='mainContainer'>
-      <form ref={form} onSubmit={sendEmail} className='formContacto'>
-        <div className="mb-3 formGroup">
-          <label htmlFor="name" className="block text-sm font-medium mb-2">Nombre</label>
-          <input type="text" name="name" id="name" placeholder="Ingrese su nombre..." className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
-        <div className="mb-3 formGroup">
-          <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-          <input type="email" name="email" id="email" placeholder="Ingrese su email..." className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
-        <div className="mb-3 formGroup">
-          <label htmlFor="message" className="block text-sm font-medium mb-2">Mensaje</label>
-          <textarea rows={3} name="message" id="message" placeholder="Ingrese su mensaje o consulta..." className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
+      <div className='bg-onix p-8 md:p-12 rounded-lg shadow-xl w-full max-w-6xl mx-auto'>
+        <h1 className='text-3xl md:text-4xl font-bold text-center mb-8 text-white'>
+          Contactanos
+        </h1>
+        
+        <form ref={form} onSubmit={sendEmail} className='space-y-6'>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="formGroup">
+              <label htmlFor="name" className="block text-lg font-medium mb-2 text-white">Nombre</label>
+              <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                placeholder="Ingrese su nombre..." 
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" 
+              />
+            </div>
+            
+            <div className="formGroup">
+              <label htmlFor="email" className="block text-lg font-medium mb-2 text-white">Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                placeholder="Ingrese su email..." 
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" 
+              />
+            </div>
+          </div>
+          
+          <div className="formGroup">
+            <label htmlFor="message" className="block text-lg font-medium mb-2 text-white">Mensaje</label>
+            <textarea 
+              rows={5} 
+              name="message" 
+              id="message" 
+              placeholder="Ingrese su mensaje o consulta..." 
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none" 
+            />
+          </div>
 
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Enviar</button>
-      </form>
+          <button 
+            type="submit" 
+            className="w-full bg-red-700 hover:bg-red-800 text-white font-bold text-lg px-6 py-3.5 rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform cursor-pointer"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

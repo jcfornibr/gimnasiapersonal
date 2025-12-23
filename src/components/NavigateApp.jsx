@@ -9,7 +9,7 @@ export function NavigateApp({ auth, logIn, logOut }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <nav className="bg-onix fixed w-full z-20 top-0 border-b border-default shadow-lg">
+    <nav className="bg-onix w-full z-20 top-0 border-b border-default shadow-lg">
       <div className="max-w-7xl flex items-center justify-between mx-auto px-4 py-3 md:py-4">
 
         {/* Logo */}
@@ -17,7 +17,7 @@ export function NavigateApp({ auth, logIn, logOut }) {
           to="/"
           className="flex items-center space-x-3"
         >
-          <span className="text-white self-center text-xl font-bold whitespace-nowrap">
+          <span className="bg-linear-to-r from-red-500 to-red-600 p-1 self-center text-xl font-bold whitespace-nowrap">
             Entrename IÁ!
           </span>
         </NavLink>
