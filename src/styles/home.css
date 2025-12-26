@@ -4,13 +4,9 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-image: url('../assets/hero-gym.jpg');
+  background-image: url("../assets/hero-gym.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
-}
-
-.bg-onix {
-  background-color: #121113;
 }

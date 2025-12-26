@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --color-onix: var(--onix);
+  --color-dark-onix: var(--dark-onix);
+  --color-light-onix: var(--light-onix);
+}
+
+:root {
+  --onix: #2c2c2c;
+  --dark-onix: #1a1a1a;
+  --light-onix: #f0f0f0;
+}
+
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
