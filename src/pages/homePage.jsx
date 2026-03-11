@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import dumbbell from "../assets/dumbbell.webp";
+import HeroImg from "../assets/hero-gym.jpg";
 import "../styles/home.css";
 
 export const HomePage = () => {
@@ -50,7 +50,7 @@ export const HomePage = () => {
               <div className="absolute -inset-1 bg-linear-to-r from-red-500/50 to-red-900/50 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
               <div className="relative aspect-square lg:aspect-video rounded-xl overflow-hidden bg-dark-onix border border-white/5">
                 <img
-                  src={dumbbell}
+                  src={HeroImg}
                   alt="Entrenamiento con pesas"
                   className="w-full h-full object-cover mix-blend-overlay opacity-60"
                 />
