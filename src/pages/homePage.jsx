@@ -48,7 +48,7 @@ export const HomePage = () => {
             
             <div className="relative group">
               <div className="absolute -inset-1 bg-linear-to-r from-red-500/50 to-red-900/50 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-              <div className="relative aspect-square lg:aspect-video rounded-xl overflow-hidden bg-dark-onix border border-white/5">
+              <div className="relative aspect-square lg:aspect-video rounded-xl overflow-hidden bg-dark-onix  ">
                 <img
                   src={HeroImg}
                   alt="Entrenamiento con pesas"
