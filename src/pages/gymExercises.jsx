@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { GymExerciseIA } from '../helpers/configIa';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Form, Button, Card, Spinner } from 'react-bootstrap';
 import '../styles/exercises.css';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { MyDocumentPDF } from '../components/pdf';
 
 export const GymExercise = () => {
 
@@ -34,84 +35,95 @@ export const GymExercise = () => {
 
   return (
     <>
-      <div id='principalContainer'>
-        <Form onSubmit={presion} id="principalForm">
-          <Form.Label>Rutina de ejercicios físicos</Form.Label><br/>
-          <Form.Label>Datos del/la alumno/a</Form.Label>
-          <hr />
-          <div id='inputsContainer'>
-            <Form.Group className="mb-3" controlId="nombreAlumno">
-              <Form.Label>Nombre y Apellido</Form.Label>
-              <Form.Control type="text" placeholder="Ingrese el nombre y apellido del alumno..." />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="sexo">
-              <Form.Label>Sexo</Form.Label>
-              <Form.Select aria-label="Default select example" className='selectsRutina'>
-                <option>Seleccione el sexo:</option>
-                <option value="hombre">Hombre</option>
-                <option value="mujer">Mujer</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="edad">
-              <Form.Label>Edad</Form.Label>
-              <Form.Control type="number" placeholder="Ingrese su edad aquí..." min={12} max={99} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="altura">
-              <Form.Label>Altura (cm)</Form.Label>
-              <Form.Control type="number" placeholder="Ingrese su altura aquí..." min={0} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="peso">
-              <Form.Label>Peso (kg)</Form.Label>
-              <Form.Control type="number" placeholder="Ingrese su peso aquí..." min={0} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="nivel">
-              <Form.Label>Nivel de entrenamiento</Form.Label>
-              <Form.Select aria-label="Default select example" className='selectsRutina'>
-                <option>Seleccione el nivel:</option>
-                <option value="novato">Novato</option>
-                <option value="intermedio">Intermedio</option>
-                <option value="avanzado">Avanzado</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="dias">
-              <Form.Label>Días por semana para entrenar</Form.Label>
-              <Form.Control type="number" placeholder="Ingrese la cantidad de días por semana a entrenar aquí..." min={1} max={7} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="aparatos">
-              <Form.Label>Con/Sin Aparatos</Form.Label>
-              <Form.Select aria-label="Default select example" className='selectsRutina'>
-                <option>Seleccione Con o Sin aparatos:</option>
-                <option value="con">Con</option>
-                <option value="sin">Sin</option>
-              </Form.Select>
-            </Form.Group>
+      <div className='mainContainer'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-7xl mx-auto'>
+          {/* Formulario - Izquierda */}
+          <div className='bg-onix p-8 md:p-10 rounded-lg shadow-xl'>
+            <h1 className='text-2xl md:text-3xl font-bold text-center mb-4 text-white'>
+              Rutina de ejercicios físicos
+            </h1>
+            <p className='text-center text-gray-200 mb-6'>Datos del/la alumno/a</p>
+
+            <form onSubmit={presion} className='space-y-4'>
+              <div>
+                <label htmlFor="nombreAlumno" className="block text-sm font-medium mb-2 text-white">Nombre y Apellido</label>
+                <input type="text" id="nombreAlumno" placeholder="Ingrese el nombre y apellido del alumno..." className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
+              </div>
+              <div>
+                <label htmlFor="sexo" className="block text-sm font-medium mb-2 text-white">Sexo</label>
+                <select id="sexo" aria-label="Default select example" className='w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all'>
+                  <option>Seleccione el sexo:</option>
+                  <option value="hombre">Hombre</option>
+                  <option value="mujer">Mujer</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="edad" className="block text-sm font-medium mb-2 text-white">Edad</label>
+                <input type="number" id="edad" placeholder="Ingrese su edad aquí..." min={12} max={99} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
+              </div>
+              <div>
+                <label htmlFor="altura" className="block text-sm font-medium mb-2 text-white">Altura (cm)</label>
+                <input type="number" id="altura" placeholder="Ingrese su altura aquí..." min={0} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
+              </div>
+              <div>
+                <label htmlFor="peso" className="block text-sm font-medium mb-2 text-white">Peso (kg)</label>
+                <input type="number" id="peso" placeholder="Ingrese su peso aquí..." min={0} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
+              </div>
+              <div>
+                <label htmlFor="nivel" className="block text-sm font-medium mb-2 text-white">Nivel de entrenamiento</label>
+                <select id="nivel" aria-label="Default select example" className='w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all'>
+                  <option>Seleccione el nivel:</option>
+                  <option value="novato">Novato</option>
+                  <option value="intermedio">Intermedio</option>
+                  <option value="avanzado">Avanzado</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="dias" className="block text-sm font-medium mb-2 text-white">Días por semana para entrenar</label>
+                <input type="number" id="dias" placeholder="Ingrese la cantidad de días por semana a entrenar aquí..." min={1} max={7} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
+              </div>
+              <div>
+                <label htmlFor="aparatos" className="block text-sm font-medium mb-2 text-white">Con/Sin Aparatos</label>
+                <select id="aparatos" aria-label="Default select example" className='w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all'>
+                  <option>Seleccione Con o Sin aparatos:</option>
+                  <option value="con">Con</option>
+                  <option value="sin">Sin</option>
+                </select>
+              </div>
+              <button type="submit" className="w-full bg-red-700 hover:bg-red-800 text-white font-bold text-base px-6 py-3 rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">
+                Dame Ejercicios Iá!
+              </button>
+            </form>
           </div>
-          <Button variant="primary" type="submit">
-            Dame Ejercicios Iá!
-          </Button>
-        </Form>
-        <Card id='principalRespuesta'>
-          <Card.Body>
-            <Card.Title>Ejercicios</Card.Title>
-            {isLoading ? (
-              <Button variant="primary" disabled>
-                <Spinner
-                  as="span"
-                  animation="grow"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-                Generando los ejercicios...!!!!
-              </Button>
-            ) : (
-              <Card.Text>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{ejercicios}</ReactMarkdown>
-              </Card.Text>
-            )
-            }
-          </Card.Body>
-        </Card>
+
+          {/* Resultados - Derecha */}
+          <div className="bg-onix p-8 md:p-10 rounded-lg shadow-xl flex flex-col">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white text-center">Ejercicios</h2>
+            <div className="overflow-y-auto max-h-screen pr-3 custom-scrollbar">
+              {isLoading ? (
+                <div className="flex justify-center items-center gap-3 text-white">
+                  <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" role="status" aria-hidden="true"></span>
+                  <span className="text-lg">Generando los ejercicios...!!!!</span>
+                </div>
+              ) : ejercicios ? (
+                <div className="markdown-content">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{ejercicios}</ReactMarkdown>
+
+                  <PDFDownloadLink document={<MyDocumentPDF rutina={ejercicios}/>} fileName='rutina_ejercicios.pdf'>
+                    {
+                      ({ loading }) => loading ? <button>Loading Document...</button> : <button className="w-full bg-red-700 hover:bg-red-800 text-white font-bold text-base px-6 py-3 rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">Descargar en PDF!</button>
+                    }
+                  </PDFDownloadLink>
+                </div>
+
+              ) : (
+                <div className="flex items-center justify-center h-full text-gray-400 text-center">
+                  <p>Completa el formulario y genera tu rutina personalizada</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

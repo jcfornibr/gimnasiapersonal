@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { Form, Button } from 'react-bootstrap';
 import '../styles/contact.css'
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -31,22 +30,55 @@ export const Contact = () => {
 
   return (
     <div className='mainContainer'>
-      <Form ref={form} onSubmit={sendEmail} className='formContacto'>
-        <Form.Group className="mb-3 formGroup" controlId="name">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control type="text" name="name" placeholder="Ingrese su nombre..." />
-        </Form.Group>
-        <Form.Group className="mb-3 formGroup" controlId="email" >
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Ingrese su email..." name="email" />
-        </Form.Group>
-        <Form.Group className="mb-3 formGroup" controlId="message" >
-          <Form.Label>Mensaje</Form.Label>
-          <Form.Control as="textarea" rows={3} name="message" placeholder="Ingrese su mensaje o consulta..." />
-        </Form.Group>
+      <div className='bg-onix p-8 md:p-12 rounded-lg shadow-xl w-full max-w-6xl mx-auto'>
+        <h1 className='text-3xl md:text-4xl font-bold text-center mb-8 text-white'>
+          Contactanos
+        </h1>
+        
+        <form ref={form} onSubmit={sendEmail} className='space-y-6'>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="formGroup">
+              <label htmlFor="name" className="block text-lg font-medium mb-2 text-white">Nombre</label>
+              <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                placeholder="Ingrese su nombre..." 
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" 
+              />
+            </div>
+            
+            <div className="formGroup">
+              <label htmlFor="email" className="block text-lg font-medium mb-2 text-white">Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                placeholder="Ingrese su email..." 
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" 
+              />
+            </div>
+          </div>
+          
+          <div className="formGroup">
+            <label htmlFor="message" className="block text-lg font-medium mb-2 text-white">Mensaje</label>
+            <textarea 
+              rows={5} 
+              name="message" 
+              id="message" 
+              placeholder="Ingrese su mensaje o consulta..." 
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none" 
+            />
+          </div>
 
-        <Button variant="primary" type="submit">Enviar</Button>
-      </Form>
+          <button 
+            type="submit" 
+            className="w-full bg-red-700 hover:bg-red-800 text-white font-bold text-lg px-6 py-3.5 rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform cursor-pointer"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
