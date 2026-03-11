@@ -1,100 +1,232 @@
 import { NavLink } from "react-router-dom";
-import entrenamiento from "../assets/entrenamiento.jpg";
-import dumbbell from "../assets/dumbbell.webp";
+import HeroImg from "../assets/hero-gym.jpg";
 import "../styles/home.css";
 
 export const HomePage = () => {
   return (
     <>
-      <main>
-        <section class="relative w-full h-[400px] md:h-[500px] lg:h-[600px] bg-[#0a0a0a] overflow-hidden flex items-center justify-center">
-          <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-red-900/20 blur-[120px] z-0"></div>
-          <div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-red-600/10 blur-[150px] z-0"></div>
-
-          <div class="absolute inset-0 w-full h-full z-0">
-            <img
-              src={dumbbell}
-              alt="dumbbell"
-              className="w-full h-full  object-contain mx-auto opacity-65"
-            />
+      <main className="flex-1 bg-black">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 px-6 lg:px-20">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div className="flex flex-col gap-8 z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold uppercase tracking-widest w-fit">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                IA Aplicada al Fitness
+              </div>
+              
+              <h1 className="text-5xl lg:text-7xl font-black leading-[1.1] tracking-tighter text-gray-100">
+                Esculpe tu Mejor Versión con{" "}
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-800">
+                  Inteligencia Artificial
+                </span>
+              </h1>
+              
+              <p className="text-lg lg:text-xl text-white/80 max-w-xl leading-relaxed">
+                Entrena con rutinas personalizadas generadas por IA, adaptadas a tu nivel, objetivos y progreso para maximizar tus resultados.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <NavLink
+                  to="/gymexercise"
+                  className="flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 text-white font-bold h-14 px-10 rounded-lg text-lg transition-all shadow-lg shadow-red-700/20"
+                >
+                  Inicia tu Transformación
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </NavLink>
+                
+                
+              </div>
+              
+              
+            </div>
+            
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-linear-to-r from-red-500/50 to-red-900/50 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+              <div className="relative aspect-square lg:aspect-video rounded-xl overflow-hidden bg-dark-onix  ">
+                <img
+                  src={HeroImg}
+                  alt="Entrenamiento con pesas"
+                  className="w-full h-full object-cover mix-blend-overlay opacity-60"
+                />
+                <div className="absolute bottom-6 left-6 right-6 p-6 rounded-lg bg-black/60 backdrop-blur-md border border-white/10">
+                  <div className="flex justify-between items-end">
+                    <div className="space-y-2">
+                      <p className="text-red-500 text-xs font-bold uppercase tracking-widest">Sesión Actual</p>
+                      <h3 className="text-xl font-bold text-white">Hipertrofia - Día de Empuje</h3>
+                      <p className="text-gray-400 text-sm">Objetivo: Pectoral Mayor, Tríceps</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-white font-mono text-2xl font-bold">84%</p>
+                      <p className="text-gray-500 text-[10px] uppercase">Intensidad</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-50 h-50 bg-red-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        </section>
 
-          <div class="relative z-10 text-center px-4">
-            <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter uppercase italic">
-              Rewrite{" "}
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
-                your limits
-              </span>
-            </h1>
-            <p class="mt-4 text-gray-400 text-lg max-w-md mx-auto">
-              Entrenamiento con IA para elevar tu máximo potencial.
-            </p>
-            <NavLink
-              to="/gymexercise"
-              className="inline-flex w-1/4 justify-center items-center text-gray-200 bg-red-700 hover:bg-red-800 shadow-lg hover:shadow-xl font-bold leading-5 rounded-lg text-base px-6 py-3.5 focus:outline-none transition-all duration-200 transform "
-            >
-              Entrene IA!
-            </NavLink>
+        {/* Features Section */}
+        <section className="py-24 px-6 lg:px-20 bg-dark-onix" id="features">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+              <div className="space-y-4">
+                <h2 className="text-4xl lg:text-5xl font-black tracking-tight text-white">
+                  Ingeniería aplicada al{" "}
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-800">
+                    Fitness
+                  </span>
+                </h2>
+                <p className="text-gray-400 max-w-xl text-lg">
+                  Libera tu verdadero potencial con nuestra herramienta diseñada para atletas serios que exigen resultados basados en datos.
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="group p-8 rounded-xl bg-black/50 border border-white/5 hover:border-red-500/50 transition-all">
+                <div className="w-14 h-14 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Personalización por IA</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Entrename IÁ analiza tu información, niveles de fuerza y equipo disponible para construir la división adaptativa perfecta.
+                </p>
+              </div>
+              
+              <div className="group p-8 rounded-xl bg-black/50 border border-white/5 hover:border-red-500/50 transition-all">
+                <div className="w-14 h-14 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Seguimiento de Progreso</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Visualiza tu volumen, intensidad y crecimiento muscular con métricas avanzadas y gráficos de rendimiento que se actualizan en tiempo real.
+                </p>
+              </div>
+              
+              <div className="group p-8 rounded-xl bg-black/50 border border-white/5 hover:border-red-500/50 transition-all">
+                <div className="w-14 h-14 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Exportaciones PDF</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Lleva tu rutina fuera de línea con guías PDF profesionales formateadas, que incluyen ejercicios y hojas de registro.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* <section className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]  mb-12">
-        
-
-          
-          <div className="absolute inset-0 w-full h-full">
-            <img
-              src={dumbbell}
-              alt="dumbbell"
-              className=" object-cover"
-              priority
-            />
+        {/* How it Works Section */}
+        <section className="py-24 px-6 lg:px-20 border-t border-white/5" id="how-it-works">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center space-y-4 mb-20">
+              <h2 className="text-4xl font-black text-white">
+                Cómo funciona la{" "}
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-800">
+                  IA
+                </span>
+              </h2>
+              <p className="text-gray-400 text-lg">De puntos de datos a ganancias masivas en tres simples pasos.</p>
+            </div>
+            
+            <div className="relative space-y-12">
+              <div className="absolute left-6 top-8 bottom-8 w-px bg-linear-to-b from-red-500 via-red-500/50 to-transparent md:left-1/2"></div>
+              
+              <div className="relative grid md:grid-cols-2 gap-12 items-center">
+                <div className="md:text-right">
+                  <h4 className="text-2xl font-bold text-white mb-2">Ingresa tus Datos</h4>
+                  <p className="text-gray-400">
+                    Completa tu perfil con información sobre tu nivel de experiencia, objetivos y equipo disponible.
+                  </p>
+                </div>
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-red-700 border-4 border-black text-white font-bold z-10">
+                  1
+                </div>
+                <div className="hidden md:block"></div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 gap-12 items-center">
+                <div className="hidden md:block"></div>
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-red-700 border-4 border-black text-white font-bold z-10">
+                  2
+                </div>
+                <div className="pl-12 md:pl-0">
+                  <h4 className="text-2xl font-bold text-white mb-2">Síntesis por IA</h4>
+                  <p className="text-gray-400">
+                    La red neuronal procesa miles de puntos de datos para generar la relación volumen-frecuencia óptima específicamente para ti.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 gap-12 items-center">
+                <div className="md:text-right">
+                  <h4 className="text-2xl font-bold text-white mb-2">Empieza a Entrenar</h4>
+                  <p className="text-gray-400">
+                    Sigue el plan en tiempo real, registra tus repeticiones y observa cómo suben tus récords personales mientras la IA se adapta a tu progreso semanal.
+                  </p>
+                </div>
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-red-700 border-4 border-black text-white font-bold z-10">
+                  3
+                </div>
+                <div className="hidden md:block"></div>
+              </div>
+            </div>
           </div>
+        </section>
 
-       
-          <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 md:px-8">
-            <h1 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl text-winered mb-4 md:mb-6">
-              Personal Trainer
-            </h1>
-            <h2 className="text-sm md:text-base  lg:text-lg text-white mb-6 md:mb-8 max-w-2xl">
-              Recordá que debés seguir las instrucciones de la mejor manera para{" "}
-              <span className="text-white font-semibold">
-                resultados óptimos
-              </span>
-              .
-            </h2>
-            <NavLink
-              to="/gymexercise"
-              className="inline-flex w-1/4 justify-center items-center text-gray-200 bg-red-700 hover:bg-red-800 shadow-lg hover:shadow-xl font-bold leading-5 rounded-lg text-base px-6 py-3.5 focus:outline-none transition-all duration-200 transform "
-            >
-              Entrene IA!
-            </NavLink>
+        {/* CTA Section */}
+        <section className="py-24 px-6 lg:px-20">
+          <div className="max-w-7xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden bg-linear-to-br from-dark-onix to-onix p-12 lg:p-20 border border-red-500/20 text-center">
+              <div className="absolute top-0 right-0 p-8 opacity-10">
+                <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.06.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.06-4.09l-2.6-1.53C16.17 17.98 14.21 19 12 19z"/>
+                </svg>
+              </div>
+              
+              <h2 className="text-4xl lg:text-6xl font-black text-white mb-8">
+                ¿Listo para Desatar <br/>
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-800">
+                  tu Potencial?
+                </span>
+              </h2>
+              
+              <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto italic">
+                "La mente es el límite. Mientras la mente pueda visualizar el hecho de que puedes hacer algo, puedes hacerlo."
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <NavLink
+                  to="/gymexercise"
+                  className="bg-red-700 hover:bg-red-800 text-white font-bold h-16 px-12 rounded text-xl transition-all shadow-xl shadow-red-700/30 flex items-center justify-center"
+                >
+                  Iniciar Ahora
+                </NavLink>
+                <NavLink
+                  to="/nosotros"
+                  className="bg-transparent border border-white/20 hover:border-white/40 text-white font-bold h-16 px-12 rounded text-xl transition-all flex items-center justify-center"
+                >
+                  Conocer Más
+                </NavLink>
+              </div>
+            </div>
           </div>
-        </section> */}
-
-        {/* <div className="bg-onix block max-w-md p-8 md:p-10 rounded-lg shadow-xl transition-all duration-300 hover:shadow-2xl">
-        <img className="rounded-lg w-full h-auto shadow-lg mb-6" src={entrenamiento} alt="Entrenamiento" />
-        
-        <h5 className="mb-4 text-3xl md:text-4xl font-bold tracking-tight text-white text-center">
-          Personal Trainer
-        </h5>
-        
-        <div className="mb-8 space-y-3 text-gray-200 text-lg leading-relaxed">
-          <p>
-            <span className="text-white font-semibold">Obtené ejercicios personalizados</span> para realizar donde te sientas cómodo.
-          </p>
-          <p>
-            Recordá que debés seguir las instrucciones de la mejor manera para <span className="text-white font-semibold">resultados óptimos</span>.
-          </p>
-          <p className="text-yellow-300 font-medium">
-            ¡Y siempre, consultá con un profesor en persona!
-          </p>
-        </div>
-        
-        <NavLink to='/gymexercise' className="inline-flex w-full justify-center items-center text-gray-200 bg-red-700 hover:bg-red-800 shadow-lg hover:shadow-xl font-bold leading-5 rounded-lg text-base px-6 py-3.5 focus:outline-none transition-all duration-200 transform ">
-          Entrene IA!
-        </NavLink>
-      </div> */}
+        </section>
       </main>
     </>
   );

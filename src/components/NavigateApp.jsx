@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/header.css";
 import { FaAngleDown } from "react-icons/fa";
@@ -7,99 +7,102 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 export function NavigateApp({ auth, logIn, logOut }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   return (
     <>
-      <nav className="fixed w-full z-20 top-0 ">
-        <div className="max-w-7xl flex items-center justify-between mx-auto px-4 py-3 md:py-4">
+      <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#121113] backdrop-blur-md px-6 lg:px-20 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <NavLink to="/" className="flex items-center space-x-3">
-            <span className="bg-gradient-to-r from-red-500 to-red-600 p-2 rounded self-center text-xl font-bold whitespace-nowrap text-white">
-              Entrename IÁ!
-            </span>
+            <h2 className="text-white text-xl font-bold leading-tight tracking-tight">Entrename <span className="text-red-500 text-sm uppercase tracking-widest">IÁ</span></h2>
           </NavLink>
 
-          <div className="hidden md:flex bg-dark-onix/80 backdrop-blur-sm  py-2 px-3 rounded-full border-2 border-onix md:items-center md:space-x-6 lg:space-x-8">
-            <ul className="flex flex-row items-center space-x-6 lg:space-x-8 font-medium">
-              <li>
-                <NavLink
-                  to="/"
-                  className="block text-white py-2 px-3 rounded hover:text-gray-300 transition-colors"
-                >
-                  Inicio
-                </NavLink>
-              </li>
+          <div className="hidden md:flex items-center gap-10">
+            <NavLink
+              to="/"
+              className="text-sm font-medium hover:text-red-500 transition-colors text-white/80"
+            >
+              Inicio
+            </NavLink>
 
-              {/* Dropdown */}
-              <li className="relative">
-                <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex text-white items-center py-2 px-3 rounded hover:text-gray-300 cursor-pointer transition-colors"
-                >
-                  Temáticas{" "}
-                  <FaAngleDown
-                    className={`ml-1 transition-transform ${
-                      dropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+            {/* Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex text-sm font-medium hover:text-red-500 transition-colors text-white/80 items-center cursor-pointer"
+              >
+                Temáticas{" "}
+                <FaAngleDown
+                  className={`ml-1 transition-transform ${
+                    dropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-                {dropdownOpen && (
-                  <div className="absolute z-10 mt-2 w-56 bg-white text-slate-900 rounded-lg shadow-lg">
-                    <NavLink
-                      to="/gymexercise"
-                      className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      Entrenamiento Personal
-                    </NavLink>
-                  </div>
-                )}
-              </li>
-
-              <li>
-                <NavLink
-                  to="/nosotros"
-                  className="block text-white py-2 px-3 rounded hover:text-gray-300 transition-colors"
-                >
-                  Nosotros
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/contacto"
-                  className="block text-white py-2 px-3 rounded hover:text-gray-300 transition-colors"
-                >
-                  Contacto
-                </NavLink>
-              </li>
-
-              {auth && (
-                <li>
+              {dropdownOpen && (
+                <div className="absolute z-10 mt-2 w-56 bg-white text-gray-900 rounded-lg shadow-lg">
                   <NavLink
-                    to="/admin"
-                    className="block text-white py-2 px-3 rounded hover:text-gray-300 transition-colors"
+                    to="/gymexercise"
+                    className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={() => setDropdownOpen(false)}
                   >
-                    Admin
+                    Entrenamiento Personal
                   </NavLink>
-                </li>
+                </div>
               )}
+            </div>
 
-              <li>
-                <button
-                  onClick={() => (auth ? logOut() : logIn())}
-                  className="bg-white text-gray-700 font-bold text-sm lg:text-base rounded-lg hover:bg-gray-100 duration-300 transition-colors border px-6 lg:px-8 py-2.5 cursor-pointer"
-                >
-                  {auth ? "Log Out" : "Log In"}
-                </button>
-              </li>
-            </ul>
+            <NavLink
+              to="/nosotros"
+              className="text-sm font-medium hover:text-red-500 transition-colors text-white/80"
+            >
+              Nosotros
+            </NavLink>
+
+            <NavLink
+              to="/contacto"
+              className="text-sm font-medium hover:text-red-500 transition-colors text-white/80"
+            >
+              Contacto
+            </NavLink>
+
+            {auth && (
+              <NavLink
+                to="/admin"
+                className="text-sm font-medium hover:text-red-500 transition-colors text-white/80"
+              >
+                Admin
+              </NavLink>
+            )}
+
+            <button
+              onClick={() => (auth ? logOut() : logIn())}
+              className="bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-2 rounded transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              {auth ? "Log Out" : "Log In"}
+            </button>
           </div>
 
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-white text-2xl rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 transition-all"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-300 text-2xl rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 transition-all"
           >
             <span className="sr-only">
               {menuOpen ? "Cerrar menú" : "Abrir menú"}
@@ -109,23 +112,21 @@ export function NavigateApp({ auth, logIn, logOut }) {
         </div>
 
         {menuOpen && (
-          <div className="md:hidden bg-onix/90 backdrop-blur-sm py-2 px-3  border-gray-700">
-            <ul className="flex flex-col w-full p-4 font-medium space-y-2">
-              <li>
-                <NavLink
-                  to="/"
-                  className="block text-white py-2 px-3 rounded hover:bg-gray-700 transition-colors"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Inicio
-                </NavLink>
-              </li>
+          <div className="md:hidden bg-linear-to-br from-dark-onix to-onix backdrop-blur-sm border-t border-white/10 mt-2">
+            <div className="flex flex-col w-full p-4 space-y-2">
+              <NavLink
+                to="/"
+                className="text-sm font-medium text-white/80 hover:text-red-500 py-2 px-3 rounded transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Inicio
+              </NavLink>
 
               {/* Dropdown Mobile */}
-              <li>
+              <div>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex text-white items-center w-full py-2 px-3 rounded hover:bg-gray-700 cursor-pointer transition-colors"
+                  className="flex text-sm font-medium text-white/80 hover:text-red-500 items-center w-full py-2 px-3 rounded cursor-pointer transition-colors"
                 >
                   Temáticas{" "}
                   <FaAngleDown
@@ -139,7 +140,7 @@ export function NavigateApp({ auth, logIn, logOut }) {
                   <div className="mt-2 ml-4">
                     <NavLink
                       to="/gymexercise"
-                      className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm font-medium text-white/80 hover:text-red-500 rounded-lg transition-colors"
                       onClick={() => {
                         setDropdownOpen(false);
                         setMenuOpen(false);
@@ -149,53 +150,47 @@ export function NavigateApp({ auth, logIn, logOut }) {
                     </NavLink>
                   </div>
                 )}
-              </li>
+              </div>
 
-              <li>
-                <NavLink
-                  to="/nosotros"
-                  className="block text-white py-2 px-3 rounded hover:bg-gray-700 transition-colors"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Nosotros
-                </NavLink>
-              </li>
+              <NavLink
+                to="/nosotros"
+                className="text-sm font-medium text-white/80 hover:text-red-500 py-2 px-3 rounded transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Nosotros
+              </NavLink>
 
-              <li>
-                <NavLink
-                  to="/contacto"
-                  className="block text-white py-2 px-3 rounded hover:bg-gray-700 transition-colors"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Contacto
-                </NavLink>
-              </li>
+              <NavLink
+                to="/contacto"
+                className="text-sm font-medium text-white/80 hover:text-red-500 py-2 px-3 rounded transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Contacto
+              </NavLink>
 
               {auth && (
-                <li>
-                  <NavLink
-                    to="/admin"
-                    className="block text-white py-2 px-3 rounded hover:bg-gray-700 transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Admin
-                  </NavLink>
-                </li>
+                <NavLink
+                  to="/admin"
+                  className="text-sm font-medium text-white/80 hover:text-red-500 py-2 px-3 rounded transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Admin
+                </NavLink>
               )}
 
               {/* Boton login mobile */}
-              <li className="border-t-2 border-gray-700 pt-4 mt-2">
+              <div className="border-t border-white/10 pt-4 mt-2">
                 <button
                   onClick={() => {
                     auth ? logOut() : logIn();
                     setMenuOpen(false);
                   }}
-                  className="w-full bg-white text-gray-700 font-bold text-sm rounded-lg hover:bg-gray-100 duration-300 transition-colors border px-4 py-2.5 cursor-pointer"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-2 rounded transition-all transform hover:scale-105 active:scale-95"
                 >
                   {auth ? "Log Out" : "Log In"}
                 </button>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         )}
       </nav>
