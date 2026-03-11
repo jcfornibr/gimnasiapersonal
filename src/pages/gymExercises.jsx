@@ -25,6 +25,7 @@ export const GymExercise = () => {
       nivel: e.target.nivel.value,
       dias: e.target.dias.value,
       aparatos: e.target.aparatos.value,
+      objetivo: e.target.objetivo.value,
     }
 
     const result = await GymExerciseIA(mensaje);
@@ -89,6 +90,10 @@ export const GymExercise = () => {
                   <option value="con">Con</option>
                   <option value="sin">Sin</option>
                 </select>
+              </div>
+              <div>
+                <label htmlFor="objetivo" className="block text-sm font-medium mb-2 text-white">Objetivo: </label>
+                <input type="text" id="objetivo" placeholder="Ingrese el objetivo de la rutina..." className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
               </div>
               <button type="submit" className="w-full bg-red-700 hover:bg-red-800 text-white font-bold text-base px-6 py-3 rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">
                 Dame Ejercicios Iá!
