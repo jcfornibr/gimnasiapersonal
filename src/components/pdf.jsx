@@ -64,6 +64,31 @@ const styles = StyleSheet.create({
     color: '#555',
     lineHeight: 1.5,
   },
+  table: {
+    marginTop: 10,
+    marginBottom: 10,
+    border: '1 solid #bbb',
+    borderRadius: 3,
+    overflow: 'hidden',
+  },
+  tableRow: {
+    flexDirection: 'row',
+  },
+  tableRowEven: {
+    backgroundColor: '#f9f9f9',
+  },
+  tableCell: {
+    flex: 1,
+    padding: 6,
+    borderRight: '1 solid #bbb',
+    borderBottom: '1 solid #bbb',
+    fontSize: 10,
+  },
+  tableHeader: {
+    backgroundColor: '#e0e0e0',
+    fontWeight: 'bold',
+    fontSize: 11,
+  },
   footer: {
     marginTop: 20,
     paddingTop: 15,
@@ -78,6 +103,25 @@ const styles = StyleSheet.create({
 const parseMarkdownLine = (line) => {
   if (!line) return null;
 
+  // Table row detection (Markdown pipe table)
+  // A table row starts and ends with a pipe and has at least one pipe inside.
+  const tableMatch = line.trim().match(/^\|.*\|$/);
+  if (tableMatch) {
+    // Split on pipes, discard leading/trailing empty strings
+    const cells = line
+      .split('|')
+      .slice(1, -1)
+      .map((c) => c.trim());
+
+    // Determine if this is a separator row ("|:----|----:|")
+    const isSeparator = cells.every((c) => /^:?-+:?$/.test(c));
+    if (isSeparator) {
+      return { type: 'tableSeparator' };
+    }
+
+    return { type: 'tableRow', cells };
+  }
+
   // Count leading # for heading level
   const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
   if (headingMatch) {
@@ -86,8 +130,37 @@ const parseMarkdownLine = (line) => {
     return { type: 'heading', level, text };
   }
 
-  // Check if line is plain text
+  // Fallback: treat as plain text
   return { type: 'text', text: line };
+};
+
+// Helper to render inline markdown-like styles inside a text string
+const renderInlineText = (text) => {
+  // strip leftover single asterisks
+  let clean = text.replace(/\*(?!\*)([^*]+)\*(?!\*)/g, '$1');
+
+  // split by bold markers ** **
+  const parts = [];
+  let remaining = clean;
+  const boldRegex = /\*\*(.+?)\*\*/;
+
+  while (true) {
+    const match = remaining.match(boldRegex);
+    if (!match) break;
+    const [full, inner] = match;
+    const index = remaining.indexOf(full);
+    if (index > 0) {
+      parts.push(<Text key={parts.length}>{remaining.slice(0, index)}</Text>);
+    }
+    parts.push(
+      <Text key={parts.length} style={styles.boldText}>
+        {inner}
+      </Text>
+    );
+    remaining = remaining.slice(index + full.length);
+  }
+  if (remaining) parts.push(<Text key={parts.length}>{remaining}</Text>);
+  return parts;
 };
 
 // Function to render content based on parsed markdown
@@ -96,7 +169,7 @@ const renderContent = (line, index) => {
   
   if (!parsed || !parsed.text.trim()) return null;
 
-  const text = parsed.text.replace(/\*/g, '').trim(); // Remove asterisks
+  const text = parsed.text.replace(/\*/g, '').trim(); // Remove asterisks from headings/text
 
   switch (parsed.type) {
     case 'heading':
@@ -124,6 +197,19 @@ const renderContent = (line, index) => {
           {text}
         </Text>
       );
+    case 'tableRow':
+      return (
+        <View key={index} style={styles.tableRow}>
+          {parsed.cells.map((cell, cellIndex) => (
+            <Text
+              key={cellIndex}
+              style={[styles.tableCell, index === 0 ? styles.tableHeader : {}]}
+            >
+              {renderInlineText(cell)}
+            </Text>
+          ))}
+        </View>
+      );
     case 'text':
       return (
         <Text key={index} style={styles.text}>
@@ -140,11 +226,77 @@ export const MyDocumentPDF = ({ rutina }) => {
   // Split the rutina into lines and parse each one
   const lines = rutina.split('\n').filter(line => line.trim());
 
+  // Group table rows
+  const content = [];
+  let tableRows = [];
+  let inTable = false;
+
+  lines.forEach((line, index) => {
+    const parsed = parseMarkdownLine(line);
+    if (!parsed) return;
+
+    if (parsed.type === 'tableRow') {
+      if (!inTable) {
+        inTable = true;
+        tableRows = [];
+      }
+      tableRows.push(parsed);
+    } else if (parsed.type === 'tableSeparator') {
+      // separator row just indicates alignment and belongs to current table
+      // do not output it, but ensure we are in table mode so later rows join
+      if (!inTable) {
+        inTable = true;
+        tableRows = [];
+      }
+    } else {
+      if (inTable) {
+        content.push({ type: 'table', rows: tableRows });
+        inTable = false;
+        tableRows = [];
+      }
+      content.push({ ...parsed, index });
+    }
+  });
+
+  if (inTable) {
+    content.push({ type: 'table', rows: tableRows });
+  }
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View>
-          {lines.map((line, index) => renderContent(line, index))}
+          {content.map((item, index) => {
+            if (item.type === 'table') {
+              return (
+                <View key={index} style={styles.table}>
+                  {item.rows.map((row, rowIndex) => (
+                    <View
+                      key={rowIndex}
+                      style={[
+                        styles.tableRow,
+                        rowIndex % 2 === 1 ? styles.tableRowEven : {},
+                      ]}
+                    >
+                      {row.cells.map((cell, cellIndex) => (
+                        <Text
+                          key={cellIndex}
+                          style={[
+                            styles.tableCell,
+                            rowIndex === 0 ? styles.tableHeader : {},
+                          ]}
+                        >
+                          {cell}
+                        </Text>
+                      ))}
+                    </View>
+                  ))}
+                </View>
+              );
+            } else {
+              return renderContent(item.text, item.index);
+            }
+          })}
         </View>
         <View style={styles.footer}>
           <Text>Rutina personalizada - GimnasIA</Text>
