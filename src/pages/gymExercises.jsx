@@ -43,7 +43,11 @@ export const GymExercise = () => {
               Rutina de ejercicios físicos
             </h1>
             <p className='text-center text-gray-200 mb-6'>Datos del/la alumno/a</p>
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 75a4cc84c193b3e697d93467d20adec36bd050bf
             <form onSubmit={presion} className='space-y-4'>
               <div>
                 <label htmlFor="nombreAlumno" className="block text-sm font-medium mb-2 text-white">Nombre y Apellido</label>
@@ -108,6 +112,7 @@ export const GymExercise = () => {
               ) : ejercicios ? (
                 <div className="markdown-content">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>{ejercicios}</ReactMarkdown>
+<<<<<<< HEAD
 
                   <PDFDownloadLink document={<MyDocumentPDF rutina={ejercicios}/>} fileName='rutina_ejercicios.pdf'>
                     {
@@ -116,6 +121,9 @@ export const GymExercise = () => {
                   </PDFDownloadLink>
                 </div>
 
+=======
+                </div>
+>>>>>>> 75a4cc84c193b3e697d93467d20adec36bd050bf
               ) : (
                 <div className="flex items-center justify-center h-full text-gray-400 text-center">
                   <p>Completa el formulario y genera tu rutina personalizada</p>
