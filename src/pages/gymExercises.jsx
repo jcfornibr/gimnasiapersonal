@@ -10,6 +10,11 @@ export const GymExercise = () => {
 
   const [ejercicios, setEjercicios] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [sexo, setSexo] = useState('');
+  const [nivel, setNivel] = useState('');
+  const [aparatos, setAparatos] = useState('');
+  const [objetivo, setObjetivo] = useState('');
 
 
   async function presion(e) {
@@ -18,16 +23,17 @@ export const GymExercise = () => {
 
     const mensaje = {
       nombreAlumno: e.target.nombreAlumno.value,
-      sexo: e.target.sexo.value,
+      sexo: sexo,
       edad: e.target.edad.value,
       altura: e.target.altura.value,
       peso: e.target.peso.value,
-      nivel: e.target.nivel.value,
+      nivel: nivel,
       dias: e.target.dias.value,
-      aparatos: e.target.aparatos.value,
-      objetivo: e.target.objetivo.value,
+      aparatos: aparatos,
+      objetivo: objetivo,
     }
 
+    setFormData(mensaje);
     const result = await GymExerciseIA(mensaje);
     setEjercicios(result);
 
@@ -36,100 +42,391 @@ export const GymExercise = () => {
 
   return (
     <>
-      <div className='mainContainer'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-7xl mx-auto'>
+      <main className="flex-1 bg-black min-h-screen py-8 px-4 md:px-8">
+        <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto w-full">
           {/* Formulario - Izquierda */}
-          <div className='bg-onix p-8 md:p-10 rounded-lg shadow-xl'>
-            <h1 className='text-2xl md:text-3xl font-bold text-center mb-4 text-white'>
-              Rutina de ejercicios físicos
-            </h1>
-            <p className='text-center text-gray-200 mb-6'>Datos del/la alumno/a</p>
+          <section className="w-full md:w-5/12 flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-4xl font-black leading-tight tracking-tight text-gray-100">
+                Crea Tu <span className="text-red-600">Rutina.</span>
+              </h1>
+              <p className="text-gray-400 text-base">
+                Ingresa tus métricas y objetivos para generar un plan de entrenamiento de precisión con IA.
+              </p>
+            </div>
+            
+            <div className="bg-zinc-900 p-6 rounded-xl border border-red-600/10 shadow-2xl">
+              <form onSubmit={presion} className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="nombreAlumno" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                    Nombre Completo
+                  </label>
+                  <input 
+                    type="text" 
+                    id="nombreAlumno" 
+                    placeholder="ej. Alex Johnson" 
+                    className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
 
-            <form onSubmit={presion} className='space-y-4'>
-              <div>
-                <label htmlFor="nombreAlumno" className="block text-sm font-medium mb-2 text-white">Nombre y Apellido</label>
-                <input type="text" id="nombreAlumno" placeholder="Ingrese el nombre y apellido del alumno..." className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
-              </div>
-              <div>
-                <label htmlFor="sexo" className="block text-sm font-medium mb-2 text-white">Sexo</label>
-                <select id="sexo" aria-label="Default select example" className='w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all'>
-                  <option>Seleccione el sexo:</option>
-                  <option value="hombre">Hombre</option>
-                  <option value="mujer">Mujer</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="edad" className="block text-sm font-medium mb-2 text-white">Edad</label>
-                <input type="number" id="edad" placeholder="Ingrese su edad aquí..." min={12} max={99} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
-              </div>
-              <div>
-                <label htmlFor="altura" className="block text-sm font-medium mb-2 text-white">Altura (cm)</label>
-                <input type="number" id="altura" placeholder="Ingrese su altura aquí..." min={0} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
-              </div>
-              <div>
-                <label htmlFor="peso" className="block text-sm font-medium mb-2 text-white">Peso (kg)</label>
-                <input type="number" id="peso" placeholder="Ingrese su peso aquí..." min={0} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
-              </div>
-              <div>
-                <label htmlFor="nivel" className="block text-sm font-medium mb-2 text-white">Nivel de entrenamiento</label>
-                <select id="nivel" aria-label="Default select example" className='w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all'>
-                  <option>Seleccione el nivel:</option>
-                  <option value="novato">Novato</option>
-                  <option value="intermedio">Intermedio</option>
-                  <option value="avanzado">Avanzado</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="dias" className="block text-sm font-medium mb-2 text-white">Días por semana para entrenar</label>
-                <input type="number" id="dias" placeholder="Ingrese la cantidad de días por semana a entrenar aquí..." min={1} max={7} className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
-              </div>
-              <div>
-                <label htmlFor="aparatos" className="block text-sm font-medium mb-2 text-white">Con/Sin Aparatos</label>
-                <select id="aparatos" aria-label="Default select example" className='w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all'>
-                  <option>Seleccione Con o Sin aparatos:</option>
-                  <option value="con">Con</option>
-                  <option value="sin">Sin</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="objetivo" className="block text-sm font-medium mb-2 text-white">Objetivo: </label>
-                <input type="text" id="objetivo" placeholder="Ingrese el objetivo de la rutina..." className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" />
-              </div>
-              <button type="submit" className="w-full bg-red-700 hover:bg-red-800 text-white font-bold text-base px-6 py-3 rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">
-                Dame Ejercicios Iá!
-              </button>
-            </form>
-          </div>
+                <div className="flex gap-4">
+                  <div className="flex-1 flex flex-col gap-2">
+                    <label htmlFor="peso" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                      Peso (kg)
+                    </label>
+                    <input 
+                      type="number" 
+                      id="peso" 
+                      placeholder="75" 
+                      min={0}
+                      className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1 flex flex-col gap-2">
+                    <label htmlFor="altura" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                      Altura (cm)
+                    </label>
+                    <input 
+                      type="number" 
+                      id="altura" 
+                      placeholder="180" 
+                      min={0}
+                      className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-1 flex flex-col gap-2">
+                    <label htmlFor="edad" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                      Edad
+                    </label>
+                    <input 
+                      type="number" 
+                      id="edad" 
+                      placeholder="25" 
+                      min={12} 
+                      max={99}
+                      className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                    Sexo
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button 
+                      type="button"
+                      onClick={() => setSexo('hombre')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        sexo === 'hombre' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">male</span> 
+                      Hombre
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setSexo('mujer')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        sexo === 'mujer' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">female</span> 
+                      Mujer
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                    Nivel de Entrenamiento
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <button 
+                      type="button"
+                      onClick={() => setNivel('novato')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        nivel === 'novato' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">emoji_events</span> 
+                      Principiante
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setNivel('intermedio')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        nivel === 'intermedio' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">bolt</span> 
+                      Intermedio
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setNivel('avanzado')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        nivel === 'avanzado' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">workspace_premium</span> 
+                      Avanzado
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="dias" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                    Días por Semana
+                  </label>
+                  <input 
+                    type="number" 
+                    id="dias" 
+                    placeholder="Ej. 4" 
+                    min={1} 
+                    max={7}
+                    className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                    Tipo de Entrenamiento
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button 
+                      type="button"
+                      onClick={() => setAparatos('con')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        aparatos === 'con' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">fitness_center</span> 
+                      Con Aparatos
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setAparatos('sin')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        aparatos === 'sin' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">self_improvement</span> 
+                      Sin Aparatos
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                    Objetivo Principal
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button 
+                      type="button"
+                      onClick={() => setObjetivo('Hipertrofia')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        objetivo === 'Hipertrofia' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">fitness_center</span> 
+                      Hipertrofia
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setObjetivo('Fuerza')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        objetivo === 'Fuerza' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">bolt</span> 
+                      Fuerza
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setObjetivo('Resistencia')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        objetivo === 'Resistencia' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">directions_run</span> 
+                      Resistencia
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setObjetivo('Pérdida de Grasa')}
+                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                        objetivo === 'Pérdida de Grasa' 
+                          ? 'border border-red-600 bg-red-600/10 text-gray-100' 
+                          : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">monitor_weight</span> 
+                      Pérdida de Grasa
+                    </button>
+                  </div>
+                </div>
+
+                <button 
+                  type="submit" 
+                  disabled={isLoading || !sexo || !nivel || !aparatos || !objetivo}
+                  className="mt-4 w-full bg-red-700 hover:bg-red-800 text-white font-black py-4 rounded-lg flex items-center justify-center gap-3 transition-all transform active:scale-[0.98] shadow-lg shadow-red-700/20 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  {isLoading ? 'GENERANDO...' : 'GENERAR ENTRENAMIENTO'}
+                  <span className="material-symbols-outlined">auto_awesome</span>
+                </button>
+              </form>
+            </div>
+          </section>
 
           {/* Resultados - Derecha */}
-          <div className="bg-onix p-8 md:p-10 rounded-lg shadow-xl flex flex-col">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white text-center">Ejercicios</h2>
-            <div className="overflow-y-auto max-h-screen pr-3 custom-scrollbar">
-              {isLoading ? (
-                <div className="flex justify-center items-center gap-3 text-white">
-                  <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" role="status" aria-hidden="true"></span>
-                  <span className="text-lg">Generando los ejercicios...!!!!</span>
-                </div>
-              ) : ejercicios ? (
-                <div className="markdown-content">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{ejercicios}</ReactMarkdown>
-
-                  <PDFDownloadLink document={<MyDocumentPDF rutina={ejercicios}/>} fileName='rutina_ejercicios.pdf'>
-                    {
-                      ({ loading }) => loading ? <button>Loading Document...</button> : <button className="w-full bg-red-700 hover:bg-red-800 text-white font-bold text-base px-6 py-3 rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">Descargar en PDF!</button>
-                    }
-                  </PDFDownloadLink>
-                </div>
-
-              ) : (
-                <div className="flex items-center justify-center h-full text-gray-400 text-center">
-                  <p>Completa el formulario y genera tu rutina personalizada</p>
+          <section className="w-full md:w-7/12 flex flex-col gap-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-gray-100 flex items-center gap-2">
+                <span className="material-symbols-outlined text-red-600">analytics</span> 
+                Resultado Generado por IA
+              </h3>
+              {ejercicios && !isLoading && (
+                <div className="flex gap-2">
+                  <span className="px-3 py-1 bg-red-600/20 text-red-600 rounded-full text-xs font-bold uppercase">
+                    Listo
+                  </span>
                 </div>
               )}
             </div>
-          </div>
+
+            <div className="bg-zinc-900 rounded-xl border border-red-600/20 overflow-hidden flex flex-col shadow-2xl min-h-150">
+              {/* Workout Header Info */}
+              {ejercicios && !isLoading && (
+                <div className="p-6 border-b border-red-600/10 bg-linear-to-r from-zinc-900 to-zinc-800">
+                  <div className="flex justify-between items-start flex-wrap gap-4">
+                    <div>
+                      <h4 className="text-2xl font-bold text-gray-100">
+                        Plan Personalizado - {formData.nombreAlumno}
+                      </h4>
+                      <p className="text-red-600 text-sm font-medium mt-1">
+                        Objetivo: {formData.objetivo}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-gray-400 text-xs uppercase font-bold">Nivel</p>
+                      <p className="text-gray-100 font-bold capitalize">{formData.nivel}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Exercise List */}
+              <div className="flex-1 p-6 flex flex-col gap-4 custom-scrollbar overflow-y-auto max-h-125">
+                {isLoading ? (
+                  <div className="flex flex-col justify-center items-center gap-4 text-white h-full">
+                    <span className="material-symbols-outlined text-6xl text-red-600 animate-pulse">
+                      fitness_center
+                    </span>
+                    <span className="inline-block w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin" role="status" aria-hidden="true"></span>
+                    <span className="text-lg font-semibold">Generando tu rutina personalizada...</span>
+                  </div>
+                ) : ejercicios ? (
+                  <>
+                    <div className="markdown-content">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{ejercicios}</ReactMarkdown>
+                    </div>
+                    
+                    <div className="bg-red-600/5 p-4 rounded-lg border border-dashed border-red-600/30 text-center mt-4">
+                      <p className="text-red-600 text-sm italic">
+                        "No te detengas cuando estés cansado. Detente cuando hayas terminado."
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center justify-center h-full text-gray-400 text-center gap-4">
+                    <span className="material-symbols-outlined text-6xl text-gray-600">
+                      pending_actions
+                    </span>
+                    <p className="text-lg">Completa el formulario y genera tu rutina personalizada</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Action Footer */}
+              {ejercicios && !isLoading && (
+                <div className="p-6 border-t border-red-600/10 bg-zinc-900 flex flex-col sm:flex-row gap-4 items-center justify-between">
+                  <div className="flex gap-2">
+                    
+                  </div>
+                  <PDFDownloadLink document={<MyDocumentPDF rutina={ejercicios}/>} fileName='rutina_ejercicios.pdf'>
+                    {({ loading }) => loading ? 
+                      <button className="w-full sm:w-auto bg-zinc-800 text-gray-400 font-bold py-3 px-8 rounded flex items-center justify-center gap-2 transition-all cursor-wait">
+                        <span className="material-symbols-outlined animate-spin">sync</span> 
+                        Preparando PDF...
+                      </button> : 
+                      <button className="w-full sm:w-auto bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded flex items-center justify-center gap-2 transition-all shadow-lg shadow-red-700/10 cursor-pointer">
+                        <span className="material-symbols-outlined">picture_as_pdf</span> 
+                        Descargar Rutina como PDF
+                      </button>
+                    }
+                  </PDFDownloadLink>
+                </div>
+              )}
+            </div>
+
+            {/* Small Info Cards */}
+            {ejercicios && !isLoading && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-zinc-800 p-4 rounded border border-red-600/5 flex items-center gap-3">
+                  <span className="material-symbols-outlined text-red-600">calendar_month</span>
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase font-bold">Frecuencia</p>
+                    <p className="text-gray-100 font-bold">{formData.dias} días/semana</p>
+                  </div>
+                </div>
+                <div className="bg-zinc-800 p-4 rounded border border-red-600/5 flex items-center gap-3">
+                  <span className="material-symbols-outlined text-red-600">fitness_center</span>
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase font-bold">Equipamiento</p>
+                    <p className="text-gray-100 font-bold capitalize">{formData.aparatos} Aparatos</p>
+                  </div>
+                </div>
+                <div className="bg-zinc-800 p-4 rounded border border-red-600/5 flex items-center gap-3">
+                  <span className="material-symbols-outlined text-red-600">trending_up</span>
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase font-bold">Nivel</p>
+                    <p className="text-gray-100 font-bold capitalize">{formData.nivel}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </section>
         </div>
-      </div>
+      </main>
     </>
   )
 };

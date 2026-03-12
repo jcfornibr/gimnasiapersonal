@@ -46,6 +46,25 @@
   color: white;
 }
 
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #18181b;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #dc2626;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
 /* Estilos para la respuesta de la IA - Mejor legibilidad */
 .markdown-content {
   color: #e5e7eb;
@@ -60,7 +79,7 @@
   margin-top: 1.5rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #ef4444;
+  border-bottom: 2px solid #dc2626;
 }
 
 .markdown-content h2 {

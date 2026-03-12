@@ -10,92 +10,154 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
   },
   mainTitle: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#1a1a1a',
-    marginBottom: 20,
-    paddingBottom: 10,
-    borderBottom: '2 solid #007bff',
+    color: '#dc2626',
+    marginBottom: 15,
+    paddingBottom: 12,
+    borderBottom: '3 solid #dc2626',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#ffffff',
-    backgroundColor: '#007bff',
-    marginTop: 15,
-    marginBottom: 10,
-    padding: 8,
+    backgroundColor: '#dc2626',
+    marginTop: 20,
+    marginBottom: 12,
+    padding: 10,
+    paddingLeft: 15,
   },
   subsectionTitle: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#0056b3',
-    marginTop: 12,
+    color: '#dc2626',
+    marginTop: 15,
     marginBottom: 8,
+    paddingBottom: 4,
+    borderBottom: '1 solid #fca5a5',
   },
   text: {
     fontSize: 11,
-    lineHeight: 1.6,
-    color: '#333333',
+    lineHeight: 1.8,
+    color: '#1f2937',
     marginBottom: 6,
   },
   boldText: {
     fontSize: 11,
     fontWeight: 'bold',
-    color: '#333333',
+    color: '#1f2937',
   },
   exerciseItem: {
     marginBottom: 12,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 8,
-    paddingBottom: 8,
-    backgroundColor: '#f8f9fa',
-    borderLeft: '3 solid #28a745',
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#fef2f2',
+    borderLeft: '4 solid #dc2626',
+    borderRadius: 4,
   },
   exerciseName: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#28a745',
-    marginBottom: 4,
+    color: '#dc2626',
+    marginBottom: 5,
   },
   exerciseDetails: {
     fontSize: 10,
-    color: '#555',
-    lineHeight: 1.5,
+    color: '#6b7280',
+    lineHeight: 1.6,
   },
   table: {
-    marginTop: 10,
-    marginBottom: 10,
-    border: '1 solid #bbb',
-    borderRadius: 3,
+    marginTop: 12,
+    marginBottom: 15,
+    border: '2 solid #dc2626',
+    borderRadius: 4,
     overflow: 'hidden',
   },
   tableRow: {
     flexDirection: 'row',
   },
   tableRowEven: {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#fef2f2',
   },
   tableCell: {
     flex: 1,
-    padding: 6,
-    borderRight: '1 solid #bbb',
-    borderBottom: '1 solid #bbb',
+    padding: 8,
+    borderRight: '1 solid #fca5a5',
+    borderBottom: '1 solid #fca5a5',
     fontSize: 10,
+    color: '#374151',
   },
   tableHeader: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#dc2626',
+    color: '#ffffff',
     fontWeight: 'bold',
     fontSize: 11,
+    padding: 10,
+  },
+  header: {
+    marginBottom: 25,
+    paddingBottom: 20,
+    borderBottom: '2 solid #dc2626',
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginBottom: 8,
+  },
+  headerSubtitle: {
+    fontSize: 12,
+    color: '#dc2626',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+  },
+  infoCard: {
+    backgroundColor: '#fef2f2',
+    padding: 12,
+    marginBottom: 15,
+    borderLeft: '3 solid #dc2626',
+  },
+  infoLabel: {
+    fontSize: 9,
+    color: '#6b7280',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    marginBottom: 3,
+  },
+  infoValue: {
+    fontSize: 11,
+    color: '#1f2937',
+    fontWeight: 'bold',
   },
   footer: {
-    marginTop: 20,
+    position: 'absolute',
+    bottom: 30,
+    left: 30,
+    right: 30,
     paddingTop: 15,
-    borderTop: '1 solid #dddddd',
+    borderTop: '1 solid #e5e7eb',
     textAlign: 'center',
     fontSize: 9,
-    color: '#999999',
+    color: '#9ca3af',
+  },
+  motivationalQuote: {
+    backgroundColor: '#fef2f2',
+    padding: 15,
+    marginTop: 20,
+    marginBottom: 15,
+    borderLeft: '3 dashed #dc2626',
+    borderRight: '3 dashed #dc2626',
+  },
+  quoteText: {
+    fontSize: 11,
+    color: '#dc2626',
+    fontStyle: 'italic',
+    textAlign: 'center',
   },
 });
 
@@ -167,8 +229,15 @@ const renderInlineText = (text) => {
 const renderContent = (line, index) => {
   const parsed = parseMarkdownLine(line);
   
-  if (!parsed || !parsed.text.trim()) return null;
+  if (!parsed) return null;
 
+  // Handle table rows separately
+  if (parsed.type === 'tableRow' || parsed.type === 'tableSeparator') {
+    return null; // Tables are handled in the main render
+  }
+
+  if (!parsed.text || !parsed.text.trim()) return null;
+  
   const text = parsed.text.replace(/\*/g, '').trim(); // Remove asterisks from headings/text
 
   switch (parsed.type) {
@@ -191,26 +260,27 @@ const renderContent = (line, index) => {
             {text}
           </Text>
         );
+      } else if (parsed.level === 4) {
+        return (
+          <View key={index} style={styles.exerciseItem}>
+            <Text style={styles.exerciseName}>{text}</Text>
+          </View>
+        );
       }
       return (
         <Text key={index} style={styles.text}>
           {text}
         </Text>
       );
-    case 'tableRow':
-      return (
-        <View key={index} style={styles.tableRow}>
-          {parsed.cells.map((cell, cellIndex) => (
-            <Text
-              key={cellIndex}
-              style={[styles.tableCell, index === 0 ? styles.tableHeader : {}]}
-            >
-              {renderInlineText(cell)}
-            </Text>
-          ))}
-        </View>
-      );
     case 'text':
+      // Check if it looks like exercise details (contains "series", "repeticiones", etc.)
+      if (text.match(/serie|repeticion|descanso|tiempo|set|rep/i)) {
+        return (
+          <Text key={index} style={styles.exerciseDetails}>
+            {text}
+          </Text>
+        );
+      }
       return (
         <Text key={index} style={styles.text}>
           {text}
@@ -265,6 +335,13 @@ export const MyDocumentPDF = ({ rutina }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Rutina de Entrenamiento</Text>
+          <Text style={styles.headerSubtitle}>Entrename IÁ</Text>
+        </View>
+
+        {/* Main Content */}
         <View>
           {content.map((item, index) => {
             if (item.type === 'table') {
@@ -275,7 +352,7 @@ export const MyDocumentPDF = ({ rutina }) => {
                       key={rowIndex}
                       style={[
                         styles.tableRow,
-                        rowIndex % 2 === 1 ? styles.tableRowEven : {},
+                        rowIndex % 2 === 1 && rowIndex !== 0 ? styles.tableRowEven : {},
                       ]}
                     >
                       {row.cells.map((cell, cellIndex) => (
@@ -298,8 +375,14 @@ export const MyDocumentPDF = ({ rutina }) => {
             }
           })}
         </View>
+
+        
+        
+
+        {/* Footer */}
         <View style={styles.footer}>
-          <Text>Rutina personalizada - GimnasIA</Text>
+          <Text>© 2026 Entrename IÁ - Rutina personalizada generada con Inteligencia Artificial</Text>
+          <Text style={{ marginTop: 3 }}>Consulta a un profesional antes de comenzar cualquier programa de entrenamiento</Text>
         </View>
       </Page>
     </Document>
