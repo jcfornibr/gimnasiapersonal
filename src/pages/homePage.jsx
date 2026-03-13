@@ -52,18 +52,18 @@ export const HomePage = () => {
                 <img
                   src={HeroImg}
                   alt="Entrenamiento con pesas"
-                  className="w-full h-full object-cover mix-blend-overlay opacity-60"
+                  className="w-full h-full object-cover mix-blend-overlay opacity-90"
                 />
                 <div className="absolute bottom-6 left-6 right-6 p-6 rounded-lg bg-black/60 backdrop-blur-md border border-white/10">
                   <div className="flex justify-between items-end">
                     <div className="space-y-2">
-                      <p className="text-red-500 text-xs font-bold uppercase tracking-widest">Sesión Actual</p>
-                      <h3 className="text-xl font-bold text-white">Hipertrofia - Día de Empuje</h3>
-                      <p className="text-gray-400 text-sm">Objetivo: Pectoral Mayor, Tríceps</p>
+                      <p className="text-red-500 text-xs font-bold uppercase tracking-widest">Tu Momento</p>
+                      <h3 className="text-xl font-bold text-white">El Cambio Empieza Hoy</h3>
+                      <p className="text-gray-400 text-sm">Transforma tu cuerpo con tecnología</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-white font-mono text-2xl font-bold">84%</p>
-                      <p className="text-gray-500 text-[10px] uppercase">Intensidad</p>
+                      <p className="text-white font-mono text-2xl font-bold">0</p>
+                      <p className="text-gray-500 text-[10px] uppercase">Excusas</p>
                     </div>
                   </div>
                 </div>
@@ -104,7 +104,10 @@ export const HomePage = () => {
                 </p>
               </div>
               
-              <div className="group p-8 rounded-xl bg-black/50 border border-white/5 hover:border-red-500/50 transition-all">
+              <div className="group p-8 rounded-xl bg-black/50 border border-white/5 hover:border-red-500/50 transition-all relative">
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 text-xs font-bold uppercase tracking-wide">
+                  Próximamente
+                </div>
                 <div className="w-14 h-14 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -148,7 +151,7 @@ export const HomePage = () => {
               <div className="absolute left-6 top-8 bottom-8 w-px bg-linear-to-b from-red-500 via-red-500/50 to-transparent md:left-1/2"></div>
               
               <div className="relative grid md:grid-cols-2 gap-12 items-center">
-                <div className="md:text-right">
+                <div className="pl-16 md:pl-0 md:text-right">
                   <h4 className="text-2xl font-bold text-white mb-2">Ingresa tus Datos</h4>
                   <p className="text-gray-400">
                     Completa tu perfil con información sobre tu nivel de experiencia, objetivos y equipo disponible.
@@ -165,7 +168,7 @@ export const HomePage = () => {
                 <div className="absolute left-6 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-red-700 border-4 border-black text-white font-bold z-10">
                   2
                 </div>
-                <div className="pl-12 md:pl-0">
+                <div className="pl-16 md:pl-0">
                   <h4 className="text-2xl font-bold text-white mb-2">Síntesis por IA</h4>
                   <p className="text-gray-400">
                     La red neuronal procesa miles de puntos de datos para generar la relación volumen-frecuencia óptima específicamente para ti.
@@ -174,7 +177,7 @@ export const HomePage = () => {
               </div>
               
               <div className="relative grid md:grid-cols-2 gap-12 items-center">
-                <div className="md:text-right">
+                <div className="pl-16 md:pl-0 md:text-right">
                   <h4 className="text-2xl font-bold text-white mb-2">Empieza a Entrenar</h4>
                   <p className="text-gray-400">
                     Sigue el plan en tiempo real, registra tus repeticiones y observa cómo suben tus récords personales mientras la IA se adapta a tu progreso semanal.
@@ -192,7 +195,7 @@ export const HomePage = () => {
         {/* CTA Section */}
         <section className="py-24 px-6 lg:px-20">
           <div className="max-w-7xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden bg-linear-to-br from-dark-onix to-onix p-12 lg:p-20 border border-red-500/20 text-center">
+            <div className="relative rounded-2xl overflow-hidden bg-linear-to-br from-dark-onix to-onix p-12 lg:p-20  text-center">
               <div className="absolute top-0 right-0 p-8 opacity-10">
                 <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.06.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.06-4.09l-2.6-1.53C16.17 17.98 14.21 19 12 19z"/>

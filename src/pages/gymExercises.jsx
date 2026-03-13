@@ -152,7 +152,7 @@ export const GymExercise = () => {
                   <label className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
                     Nivel de Entrenamiento
                   </label>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     <button 
                       type="button"
                       onClick={() => setNivel('novato')}

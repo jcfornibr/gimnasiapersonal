@@ -1,29 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/header.css";
-import { FaAngleDown } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 export function NavigateApp({ auth, logIn, logOut }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    };
-
-    if (dropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [dropdownOpen]);
 
   return (
     <>
@@ -41,32 +22,12 @@ export function NavigateApp({ auth, logIn, logOut }) {
               Inicio
             </NavLink>
 
-            {/* Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex text-sm font-medium hover:text-red-500 transition-colors text-white/80 items-center cursor-pointer"
-              >
-                Temáticas{" "}
-                <FaAngleDown
-                  className={`ml-1 transition-transform ${
-                    dropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {dropdownOpen && (
-                <div className="absolute z-10 mt-2 w-56 bg-white text-gray-900 rounded-lg shadow-lg">
-                  <NavLink
-                    to="/gymexercise"
-                    className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    Entrenamiento Personal
-                  </NavLink>
-                </div>
-              )}
-            </div>
+            <NavLink
+              to="/gymexercise"
+              className="text-sm font-medium hover:text-red-500 transition-colors text-white/80"
+            >
+              Coach IA
+            </NavLink>
 
             <NavLink
               to="/nosotros"
@@ -122,35 +83,13 @@ export function NavigateApp({ auth, logIn, logOut }) {
                 Inicio
               </NavLink>
 
-              {/* Dropdown Mobile */}
-              <div>
-                <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex text-sm font-medium text-white/80 hover:text-red-500 items-center w-full py-2 px-3 rounded cursor-pointer transition-colors"
-                >
-                  Temáticas{" "}
-                  <FaAngleDown
-                    className={`ml-1 transition-transform ${
-                      dropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                {dropdownOpen && (
-                  <div className="mt-2 ml-4">
-                    <NavLink
-                      to="/gymexercise"
-                      className="block px-4 py-2 text-sm font-medium text-white/80 hover:text-red-500 rounded-lg transition-colors"
-                      onClick={() => {
-                        setDropdownOpen(false);
-                        setMenuOpen(false);
-                      }}
-                    >
-                      Entrenamiento Personal
-                    </NavLink>
-                  </div>
-                )}
-              </div>
+              <NavLink
+                to="/gymexercise"
+                className="text-sm font-medium text-white/80 hover:text-red-500 py-2 px-3 rounded transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Coach IA
+              </NavLink>
 
               <NavLink
                 to="/nosotros"

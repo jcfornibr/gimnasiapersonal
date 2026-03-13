@@ -8,23 +8,30 @@ export const FooterComponent = () => {
                 {/* Brand */}
                 <div className="col-span-1 md:col-span-2 space-y-6">
                     <div className="flex items-center gap-3">
-                       
-                        <h2 className="text-white text-xl font-bold leading-tight tracking-tight">Entrename <span className="text-red-500 text-sm uppercase tracking-widest">IÁ</span></h2>
+                        <h2 className="text-white text-xl font-bold leading-tight tracking-tight">
+                            Entrename <span className="text-red-500 text-sm uppercase tracking-widest">IÁ</span>
+                        </h2>
                     </div>
 
-                    <div className="space-y-3">
-                        
+                    <div className="space-y-4">
                         <p className="text-gray-400 max-w-md text-sm leading-relaxed">
-                            Recuerda siempre revisar los enunciados de los ejercicios, ya que los mismos son generados por IA y pueden contener errores.
+                            Tu entrenador personal impulsado por inteligencia artificial. Rutinas personalizadas, 
+                            seguimiento continuo y consejos adaptados a tus objetivos.
                         </p>
-                        <p className="text-white/80 max-w-md text-sm leading-relaxed font-semibold">
-                            Muchas gracias por usar Entrename IÁ!
-                        </p>
+                        <div className="flex items-start gap-2 bg-red-700/5 border border-red-700/20 p-4 rounded-lg max-w-md">
+                            <svg className="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p className="text-gray-400 text-xs leading-relaxed">
+                                <span className="text-white/90 font-semibold">Importante:</span> Las rutinas son generadas por IA. 
+                                Verifica siempre que los ejercicios se adapten a tu condición física.
+                            </p>
+                        </div>
                     </div>
 
                     <div className="flex flex-col gap-3 pt-2">
                         <p className="text-gray-400 text-sm leading-relaxed">
-                            Si querés colaborar con el desarrollo y ampliación del proyecto:
+                            ¿Te gusta el proyecto? Ayúdanos a seguir mejorando:
                         </p>
                         <a 
                             href='https://cafecito.app/jcforni' 
@@ -42,24 +49,36 @@ export const FooterComponent = () => {
                     </div>
                 </div>
 
-                {/* Column 1 */}
+                {/* Navigation */}
                 <div>
-                    <h5 className="text-white/80 font-bold mb-6">Proyecto</h5>
+                    <h5 className="text-white/80 font-bold mb-6 uppercase tracking-wider text-sm">Navegación</h5>
                     <ul className="space-y-4 text-gray-400 text-sm">
                         <li><NavLink className="hover:text-red-500 transition-colors" to="/">Inicio</NavLink></li>
-                        <li><NavLink className="hover:text-red-500 transition-colors" to="/gymexercise">Ejercicios</NavLink></li>
+                        <li><NavLink className="hover:text-red-500 transition-colors" to="/gymexercise">Coach IA</NavLink></li>
                         <li><NavLink className="hover:text-red-500 transition-colors" to="/nosotros">Nosotros</NavLink></li>
                         <li><NavLink className="hover:text-red-500 transition-colors" to="/contacto">Contacto</NavLink></li>
                     </ul>
                 </div>
 
-                {/* Column 2 */}
+                {/* Resources */}
                 <div>
-                    <h5 className="text-white/80 font-bold mb-6">Información</h5>
+                    <h5 className="text-white/80 font-bold mb-6 uppercase tracking-wider text-sm">Recursos</h5>
                     <ul className="space-y-4 text-gray-400 text-sm">
-                        <li><NavLink className="hover:text-red-500 transition-colors" to="/nosotros">Sobre Nosotros</NavLink></li>
-                        <li><NavLink className="hover:text-red-500 transition-colors" to="/contacto">Contacto</NavLink></li>
-                        <li><a className="hover:text-red-500 transition-colors" href="https://cafecito.app/jcforni" target="_blank" rel="noopener">Apoyar</a></li>
+                        <li>
+                            <a className="hover:text-red-500 transition-colors flex items-center gap-2" href="https://cafecito.app/jcforni" target="_blank" rel="noopener">
+                                Apoyar Proyecto
+                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li><NavLink className="hover:text-red-500 transition-colors" to="/nosotros">Sobre el Proyecto</NavLink></li>
+                        <li>
+                            <span className="text-gray-500 cursor-not-allowed">Términos de Uso</span>
+                        </li>
+                        <li>
+                            <span className="text-gray-500 cursor-not-allowed">Privacidad</span>
+                        </li>
                     </ul>
                 </div>
 
