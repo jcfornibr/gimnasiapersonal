@@ -348,9 +348,7 @@ export const GymExercise = () => {
               <div className="flex-1 p-6 flex flex-col gap-4 custom-scrollbar overflow-y-auto max-h-125">
                 {isLoading ? (
                   <div className="flex flex-col justify-center items-center gap-4 text-white h-full">
-                    <span className="material-symbols-outlined text-6xl text-red-600 animate-pulse">
-                      fitness_center
-                    </span>
+                    
                     <span className="inline-block w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin" role="status" aria-hidden="true"></span>
                     <span className="text-lg font-semibold">Generando tu rutina personalizada...</span>
                   </div>
