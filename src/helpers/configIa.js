@@ -17,6 +17,7 @@ export async function GymExerciseIA(mensaje) {
                         text: `Actúa como un Entrenador Personal y Especialista en Fisiología del Ejercicio con 15 años de experiencia.Tu tarea es diseñar una rutina de entrenamiento personalizada y profesional para el siguiente perfil:Alumno: ${mensaje.nombreAlumno} (${mensaje.sexo}, ${mensaje.edad} años)
                         Biometría: ${mensaje.altura} cm | ${mensaje.peso} kgNivel de experiencia: ${mensaje.nivel}
                         Disponibilidad: ${mensaje.dias} días por semana
+                        Duración de cada rutina: ${mensaje.duracion} minutos por día
                         Equipamiento disponible: ${mensaje.aparatos}
                         Objetivo principal: ${mensaje.objetivo}
                         Estructura de la Respuesta:
@@ -25,7 +26,10 @@ export async function GymExerciseIA(mensaje) {
                         Ejercicio, Series, Repeticiones (o rango), Descanso y Notas técnicas (tips de ejecución).
                         Recomendaciones: Incluye consejos sobre progresión de cargas, calentamiento y vuelta a la calma.
                         Restricciones importantes:
-                        Ajusta la selección de ejercicios estrictamente al nivel ${mensaje.nivel} para evitar lesiones.Prioriza el uso de ${mensaje.aparatos} mencionados, pero sugiere alternativas si es necesario para la biomecánica correcta.Usa un tono motivador pero profesional.`
+                        Ajusta la selección de ejercicios estrictamente al nivel ${mensaje.nivel} para evitar lesiones. 
+                        Prioriza el uso de ${mensaje.aparatos} mencionados, pero sugiere alternativas si es necesario para la biomecánica correcta.
+                        Ten cuenta que el alumno realiza el siguiente deporte ${mensaje.deporte}, por lo que tenlo en cuenta para mejorar la rutina de entrenamiento.
+                        Usa un tono motivador pero profesional.`
                     }
                 ] 
             }
