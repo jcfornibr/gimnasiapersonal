@@ -15,7 +15,6 @@ export const GymExercise = () => {
   const [nivel, setNivel] = useState('');
   const [aparatos, setAparatos] = useState('');
   const [objetivo, setObjetivo] = useState('');
-/*   const [deporte, setDeporte] = useState(''); */
 
   async function presion(e) {
     e.preventDefault();
@@ -315,52 +314,6 @@ export const GymExercise = () => {
                     <option value="tenis">Tenis</option>
                     <option value="padel">Padel</option>
                   </select>
-                  {/* <div className="grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setDeporte('Fútbol')}
-                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${deporte === 'Fútbol'
-                        ? 'border border-red-600 bg-red-600/10 text-gray-100'
-                        : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
-                        }`}
-                    >
-                      <span className="material-symbols-outlined text-sm">fitness_center</span>
-                      Fútbol
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDeporte('Basquet')}
-                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${deporte === 'Basquet'
-                        ? 'border border-red-600 bg-red-600/10 text-gray-100'
-                        : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
-                        }`}
-                    >
-                      <span className="material-symbols-outlined text-sm">bolt</span>
-                      Basquet
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDeporte('Voley')}
-                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${deporte === 'Voley'
-                        ? 'border border-red-600 bg-red-600/10 text-gray-100'
-                        : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
-                        }`}
-                    >
-                      <span className="material-symbols-outlined text-sm">directions_run</span>
-                      Voley
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDeporte('Ningún')}
-                      className={`py-3 rounded text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${deporte === 'Ningún'
-                        ? 'border border-red-600 bg-red-600/10 text-gray-100'
-                        : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
-                        }`}
-                    >
-                      <span className="material-symbols-outlined text-sm">monitor_weight</span>
-                      Ninguno
-                    </button>
-                  </div> */}
                 </div>
 
                 <div className="flex flex-col gap-2">
