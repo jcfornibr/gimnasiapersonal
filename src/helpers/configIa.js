@@ -29,6 +29,7 @@ export async function GymExerciseIA(mensaje) {
                         Ajusta la selección de ejercicios estrictamente al nivel ${mensaje.nivel} para evitar lesiones. 
                         Prioriza el uso de ${mensaje.aparatos} mencionados, pero sugiere alternativas si es necesario para la biomecánica correcta.
                         Ten cuenta que el alumno realiza el siguiente deporte ${mensaje.deporte}, por lo que tenlo en cuenta para mejorar la rutina de entrenamiento.
+                        Además, prioriza la creación de la rutina si el alumno tiene ${mensaje.lesion}.
                         Usa un tono motivador pero profesional.`
                     }
                 ] 

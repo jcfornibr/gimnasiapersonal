@@ -1,6 +1,5 @@
 import React, { use, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
 import { HomePage } from './pages/homePage';
 import { ErrorPage } from './pages/errorPage';
 import { NavigateApp } from './components/NavigateApp';
