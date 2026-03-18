@@ -5,6 +5,24 @@ import remarkGfm from 'remark-gfm';
 import '../styles/exercises.css';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { MyDocumentPDF } from '../components/pdf';
+import { 
+  MdMale, 
+  MdFemale, 
+  MdEmojiEvents, 
+  MdBolt, 
+  MdWorkspacePremium, 
+  MdFitnessCenter, 
+  MdSelfImprovement, 
+  MdMonitorWeight, 
+  MdDirectionsRun, 
+  MdAutoAwesome, 
+  MdAnalytics, 
+  MdPendingActions, 
+  MdSync, 
+  MdPictureAsPdf, 
+  MdCalendarMonth, 
+  MdTrendingUp 
+} from 'react-icons/md';
 
 export const GymExercise = () => {
 
@@ -66,7 +84,7 @@ export const GymExercise = () => {
                   <input
                     type="text"
                     id="nombreAlumno"
-                    placeholder="ej. Alex Johnson"
+                    placeholder="ej: Alex Johnson"
                     className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
                     required
                   />
@@ -75,7 +93,7 @@ export const GymExercise = () => {
                 <div className="flex gap-4">
                   <div className="flex-1 flex flex-col gap-2">
                     <label htmlFor="peso" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
-                      Peso (kg)
+                      Peso <span className="text-xs text-gray-500 normal-case font-normal">(kg)</span>
                     </label>
                     <input
                       type="number"
@@ -88,7 +106,7 @@ export const GymExercise = () => {
                   </div>
                   <div className="flex-1 flex flex-col gap-2">
                     <label htmlFor="altura" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
-                      Altura (cm)
+                      Altura <span className="text-xs text-gray-500 normal-case font-normal">(cm)</span>
                     </label>
                     <input
                       type="number"
@@ -131,7 +149,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">male</span>
+                      <MdMale className="text-lg" />
                       Hombre
                     </button>
                     <button
@@ -142,7 +160,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">female</span>
+                      <MdFemale className="text-lg" />
                       Mujer
                     </button>
                   </div>
@@ -161,7 +179,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">emoji_events</span>
+                      <MdEmojiEvents className="text-lg" />
                       Principiante
                     </button>
                     <button
@@ -172,7 +190,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">bolt</span>
+                      <MdBolt className="text-lg" />
                       Intermedio
                     </button>
                     <button
@@ -183,7 +201,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">workspace_premium</span>
+                      <MdWorkspacePremium className="text-lg" />
                       Avanzado
                     </button>
                   </div>
@@ -191,12 +209,12 @@ export const GymExercise = () => {
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="dias" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
-                    Días por Semana
+                    Días a entrenar por semana
                   </label>
                   <input
                     type="number"
                     id="dias"
-                    placeholder="Ej. 4"
+                    placeholder="Ej: 4"
                     min={1}
                     max={7}
                     className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
@@ -206,12 +224,12 @@ export const GymExercise = () => {
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="duracion" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
-                    Duración de la rutina
+                    Sesión de Entrenamiento <span className="text-xs text-gray-500 normal-case font-normal">(En minutos)</span>
                   </label>
                   <input
                     type="number"
                     id="duracion"
-                    placeholder="Ej. 45"
+                    placeholder="Ej: 45"
                     className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
                     required
                   />
@@ -230,7 +248,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">fitness_center</span>
+                      <MdFitnessCenter className="text-lg" />
                       Con Aparatos
                     </button>
                     <button
@@ -241,7 +259,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">self_improvement</span>
+                      <MdSelfImprovement className="text-lg" />
                       Sin Aparatos
                     </button>
                   </div>
@@ -260,7 +278,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">fitness_center</span>
+                      <MdFitnessCenter className="text-lg" />
                       Hipertrofia
                     </button>
                     <button
@@ -271,7 +289,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">bolt</span>
+                      <MdBolt className="text-lg" />
                       Fuerza
                     </button>
                     <button
@@ -282,7 +300,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">directions_run</span>
+                      <MdDirectionsRun className="text-lg" />
                       Resistencia
                     </button>
                     <button
@@ -293,7 +311,7 @@ export const GymExercise = () => {
                         : 'border border-red-600/20 bg-zinc-800 text-gray-400 hover:border-red-600/50'
                         }`}
                     >
-                      <span className="material-symbols-outlined text-sm">monitor_weight</span>
+                      <MdMonitorWeight className="text-lg" />
                       Pérdida de Grasa
                     </button>
                   </div>
@@ -301,7 +319,7 @@ export const GymExercise = () => {
 
                 <div className="flex flex-col gap-2">
                   <label className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
-                    Deporte que practica
+                    ¿Practicas algún deporte actualmente? <span className="text-xs text-gray-500 normal-case font-normal">(opcional)</span>
                   </label>
                   <select name="deporte" id="deporte" className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500">
                     <option value="">Selecciona un deporte</option>
@@ -317,13 +335,13 @@ export const GymExercise = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="duracion" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
-                    Si tiene lesión, comentelo:
+                  <label htmlFor="lesion" className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+                    ¿Tienes alguna lesión o limitación física? <span className="text-xs text-gray-500 normal-case font-normal">(opcional)</span>
                   </label>
                   <input
                     type="text"
                     id="lesion"
-                    placeholder="Ej.: lesión de meniscos"
+                    placeholder="Ej: lesión de meniscos"
                     className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
                     required
                   />
@@ -335,7 +353,7 @@ export const GymExercise = () => {
                   className="mt-4 w-full bg-red-700 hover:bg-red-800 text-white font-black py-4 rounded-lg flex items-center justify-center gap-3 transition-all transform active:scale-[0.98] shadow-lg shadow-red-700/20 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {isLoading ? 'GENERANDO...' : 'GENERAR ENTRENAMIENTO'}
-                  <span className="material-symbols-outlined">auto_awesome</span>
+                  <MdAutoAwesome className="text-xl" />
                 </button>
               </form>
             </div>
@@ -345,7 +363,7 @@ export const GymExercise = () => {
           <section className="w-full md:w-7/12 flex flex-col gap-6">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-bold text-gray-100 flex items-center gap-2">
-                <span className="material-symbols-outlined text-red-600">analytics</span>
+                <MdAnalytics className="text-red-600 text-2xl" />
                 Resultado Generado por IA
               </h3>
               {ejercicios && !isLoading && (
@@ -400,9 +418,7 @@ export const GymExercise = () => {
                   </>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full text-gray-400 text-center gap-4">
-                    <span className="material-symbols-outlined text-6xl text-gray-600">
-                      pending_actions
-                    </span>
+                    <MdPendingActions className="text-6xl text-gray-600" />
                     <p className="text-lg">Completa el formulario y genera tu rutina personalizada</p>
                   </div>
                 )}
@@ -417,11 +433,11 @@ export const GymExercise = () => {
                   <PDFDownloadLink document={<MyDocumentPDF rutina={ejercicios} />} fileName='rutina_ejercicios.pdf'>
                     {({ loading }) => loading ?
                       <button className="w-full sm:w-auto bg-zinc-800 text-gray-400 font-bold py-3 px-8 rounded flex items-center justify-center gap-2 transition-all cursor-wait">
-                        <span className="material-symbols-outlined animate-spin">sync</span>
+                        <MdSync className="animate-spin text-xl" />
                         Preparando PDF...
                       </button> :
                       <button className="w-full sm:w-auto bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded flex items-center justify-center gap-2 transition-all shadow-lg shadow-red-700/10 cursor-pointer">
-                        <span className="material-symbols-outlined">picture_as_pdf</span>
+                        <MdPictureAsPdf className="text-xl" />
                         Descargar Rutina como PDF
                       </button>
                     }
@@ -434,21 +450,21 @@ export const GymExercise = () => {
             {ejercicios && !isLoading && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-zinc-800 p-4 rounded border border-red-600/5 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-red-600">calendar_month</span>
+                  <MdCalendarMonth className="text-red-600 text-2xl" />
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-bold">Frecuencia</p>
                     <p className="text-gray-100 font-bold">{formData.dias} días/semana</p>
                   </div>
                 </div>
                 <div className="bg-zinc-800 p-4 rounded border border-red-600/5 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-red-600">fitness_center</span>
+                  <MdFitnessCenter className="text-red-600 text-2xl" />
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-bold">Equipamiento</p>
                     <p className="text-gray-100 font-bold capitalize">{formData.aparatos} Aparatos</p>
                   </div>
                 </div>
                 <div className="bg-zinc-800 p-4 rounded border border-red-600/5 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-red-600">trending_up</span>
+                  <MdTrendingUp className="text-red-600 text-2xl" />
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-bold">Nivel</p>
                     <p className="text-gray-100 font-bold capitalize">{formData.nivel}</p>

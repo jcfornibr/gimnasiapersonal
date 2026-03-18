@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import '../styles/contact.css'
+import '../styles/contact.css';
+import { MdArrowForward, MdLightbulbOutline, MdPerson, MdCheckCircle, MdBolt } from 'react-icons/md';
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -110,9 +111,7 @@ export const Contact = () => {
                 className="w-full bg-red-700 hover:bg-red-800 text-white font-black py-4 rounded uppercase tracking-widest transition-all flex items-center justify-center gap-2 group cursor-pointer"
               >
                 Enviar Mensaje
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                <MdArrowForward className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
           </section>
@@ -134,9 +133,7 @@ export const Contact = () => {
               <div className="bg-red-700/5 border border-red-700/10 p-6 rounded-lg hover:bg-red-700/10 transition-all group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0 w-12 h-12 bg-red-700/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
+                    <MdLightbulbOutline className="w-6 h-6 text-red-700" />
                   </div>
                   <div>
                     <h4 className="font-bold uppercase tracking-wide text-gray-100 mb-1">
@@ -153,9 +150,7 @@ export const Contact = () => {
               <div className="bg-red-700/5 border border-red-700/10 p-6 rounded-lg hover:bg-red-700/10 transition-all group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0 w-12 h-12 bg-red-700/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                    <MdPerson className="w-6 h-6 text-red-700" />
                   </div>
                   <div>
                     <h4 className="font-bold uppercase tracking-wide text-gray-100 mb-1">
@@ -172,9 +167,7 @@ export const Contact = () => {
               <div className="bg-red-700/5 border border-red-700/10 p-6 rounded-lg hover:bg-red-700/10 transition-all group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0 w-12 h-12 bg-red-700/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <MdCheckCircle className="w-6 h-6 text-red-700" />
                   </div>
                   <div>
                     <h4 className="font-bold uppercase tracking-wide text-gray-100 mb-1">
@@ -194,9 +187,7 @@ export const Contact = () => {
             {/* Response Time Card */}
             <div className="bg-linear-to-br from-red-700/10 to-red-900/5 border border-red-700/20 p-6 rounded-lg mt-2">
               <div className="flex items-center gap-3 mb-3">
-                <svg className="w-5 h-5 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+                <MdBolt className="w-5 h-5 text-red-700" />
                 <h4 className="font-bold uppercase tracking-wide text-gray-100 text-sm">
                   Respuesta Rápida
                 </h4>

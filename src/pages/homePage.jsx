@@ -1,6 +1,17 @@
 import { NavLink } from "react-router-dom";
 import HeroImg from "../assets/hero-gym.jpg";
 import "../styles/home.css";
+import { 
+  MdArrowForward, 
+  MdLightbulbOutline, 
+  MdBarChart, 
+  MdPictureAsPdf, 
+  MdBolt, 
+  MdTrendingUp, 
+  MdCheckCircle, 
+  MdSettings,
+  MdFitnessCenter 
+} from "react-icons/md";
 
 export const HomePage = () => {
   return (
@@ -35,14 +46,23 @@ export const HomePage = () => {
                   className="flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 text-white font-bold h-14 px-10 rounded-lg text-lg transition-all shadow-lg shadow-red-700/20"
                 >
                   Inicia tu Transformación
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+                  <MdArrowForward className="w-5 h-5" />
                 </NavLink>
                 
                 
               </div>
               
+              <p className="text-gray-500 text-xs mt-6">
+                Desarrollado por{" "}
+                <a 
+                  href="https://nomossolutions.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 font-semibold hover:text-red-500 transition-colors"
+                >
+                  Nomos Solutions
+                </a>
+              </p>
               
             </div>
             
@@ -94,9 +114,7 @@ export const HomePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="group p-8 rounded-xl bg-black/50 border border-white/5 hover:border-red-500/50 transition-all">
                 <div className="w-14 h-14 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
+                  <MdLightbulbOutline className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Personalización por IA</h3>
                 <p className="text-gray-400 leading-relaxed">
@@ -109,9 +127,7 @@ export const HomePage = () => {
                   Próximamente
                 </div>
                 <div className="w-14 h-14 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
+                  <MdBarChart className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Seguimiento de Progreso</h3>
                 <p className="text-gray-400 leading-relaxed">
@@ -121,9 +137,7 @@ export const HomePage = () => {
               
               <div className="group p-8 rounded-xl bg-black/50 border border-white/5 hover:border-red-500/50 transition-all">
                 <div className="w-14 h-14 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
+                  <MdPictureAsPdf className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Exportaciones PDF</h3>
                 <p className="text-gray-400 leading-relaxed">
@@ -197,9 +211,7 @@ export const HomePage = () => {
           <div className="max-w-7xl mx-auto">
             <div className="relative rounded-2xl overflow-hidden bg-linear-to-br from-dark-onix to-onix p-12 lg:p-20  text-center">
               <div className="absolute top-0 right-0 p-8 opacity-10">
-                <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.06.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.06-4.09l-2.6-1.53C16.17 17.98 14.21 19 12 19z"/>
-                </svg>
+                <MdFitnessCenter className="w-32 h-32" />
               </div>
               
               <h2 className="text-4xl lg:text-6xl font-black text-white mb-8">
@@ -227,6 +239,18 @@ export const HomePage = () => {
                   Conocer Más
                 </NavLink>
               </div>
+              
+              <p className="text-gray-500 text-sm mt-8">
+                Desarrollado por{" "}
+                <a 
+                  href="https://nomossolutions.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 font-semibold hover:text-red-500 transition-colors"
+                >
+                  Nomos Solutions
+                </a>
+              </p>
             </div>
           </div>
         </section>

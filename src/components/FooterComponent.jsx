@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { MdInfo, MdOpenInNew } from "react-icons/md";
 
 export const FooterComponent = () => {
     return (
@@ -19,9 +20,7 @@ export const FooterComponent = () => {
                             seguimiento continuo y consejos adaptados a tus objetivos.
                         </p>
                         <div className="flex items-start gap-2 bg-red-700/5 border border-red-700/20 p-4 rounded-lg max-w-md">
-                            <svg className="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <MdInfo className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                             <p className="text-gray-400 text-xs leading-relaxed">
                                 <span className="text-white/90 font-semibold">Importante:</span> Las rutinas son generadas por IA. 
                                 Verifica siempre que los ejercicios se adapten a tu condición física.
@@ -67,9 +66,7 @@ export const FooterComponent = () => {
                         <li>
                             <a className="hover:text-red-500 transition-colors flex items-center gap-2" href="https://cafecito.app/jcforni" target="_blank" rel="noopener">
                                 Apoyar Proyecto
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
+                                <MdOpenInNew className="w-3 h-3" />
                             </a>
                         </li>
                         <li><NavLink className="hover:text-red-500 transition-colors" to="/nosotros">Sobre el Proyecto</NavLink></li>
@@ -95,7 +92,7 @@ export const FooterComponent = () => {
 
                 <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-white/80 text-sm">
                     <p className="text-center md:text-right">
-                        Desarrollado por <a href="#" className='text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-600 hover:underline transition-colors font-semibold'>GCoding IT</a>
+                        Desarrollado por <a href="#" className='text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-600 hover:underline transition-colors font-semibold'>Nomos Solutions</a>
                     </p>
                 </div>
             </div>
