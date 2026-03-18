@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import HeroImg from "../assets/hero-gym.jpg";
+import HeroImg from "../assets/hero-gym5.jpg";
 import "../styles/home.css";
 import { 
   MdArrowForward, 
