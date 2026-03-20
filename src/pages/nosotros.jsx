@@ -38,7 +38,7 @@ export const Nosotros = () => {
                 <h3 className="text-white text-xl font-bold mb-2">Entrenamientos Personalizados</h3>
                 <p className="text-gray-400 leading-relaxed">
                   Rutinas diseñadas específicamente para tu nivel, objetivos y disponibilidad. 
-                  En <span className='text-white font-semibold'>EntrenameIA!</span>, combinamos tecnología de punta con pasión por el movimiento.
+                  En <span className='text-white font-semibold'>RepWise</span>, combinamos tecnología de punta con pasión por el movimiento.
                 </p>
               </div>
             </div>
