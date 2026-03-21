@@ -55,7 +55,7 @@ export const HomePage = () => {
               <p className="text-gray-500 text-xs mt-6">
                 Desarrollado por{" "}
                 <a 
-                  href="https://nomossolutions.com" 
+                  href="https://nomos-solutions.vercel.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 font-semibold hover:text-red-500 transition-colors"
@@ -118,7 +118,7 @@ export const HomePage = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Personalización por IA</h3>
                 <p className="text-gray-400 leading-relaxed">
-                  Entrename IÁ analiza tu información, niveles de fuerza y equipo disponible para construir la división adaptativa perfecta.
+                  RepWise Fit analiza tu información, niveles de fuerza y equipo disponible para construir la división adaptativa perfecta.
                 </p>
               </div>
               
@@ -243,7 +243,7 @@ export const HomePage = () => {
               <p className="text-gray-500 text-sm mt-8">
                 Desarrollado por{" "}
                 <a 
-                  href="https://nomossolutions.com" 
+                  href="https://nomos-solutions.vercel.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 font-semibold hover:text-red-500 transition-colors"
