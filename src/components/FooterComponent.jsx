@@ -10,7 +10,7 @@ export const FooterComponent = () => {
                 <div className="col-span-1 md:col-span-2 space-y-6">
                     <div className="flex items-center gap-3">
                         <h2 className="text-white text-xl font-bold leading-tight tracking-tight">
-                            Entrename <span className="text-red-500 text-sm uppercase tracking-widest">IÁ</span>
+                            RepWise <span className="text-red-500 text-sm uppercase tracking-widest">Fit</span>
                         </h2>
                     </div>
 
@@ -86,13 +86,13 @@ export const FooterComponent = () => {
                 <div className="text-center md:text-left">
                     
                     <p className="text-white/80 text-xs mt-2">
-                        © 2026 Entrename IÁ. Todos los derechos reservados.
+                        © 2026 RepWise Fit. Todos los derechos reservados.
                     </p>
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-white/80 text-sm">
                     <p className="text-center md:text-right">
-                        Desarrollado por <a href="#" className='text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-600 hover:underline transition-colors font-semibold'>Nomos Solutions</a>
+                        Desarrollado por <a href="https://nomos-solutions.vercel.app/" className='text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-600 hover:underline transition-colors font-semibold' target="_blank">Nomos Solutions</a>
                     </p>
                 </div>
             </div>

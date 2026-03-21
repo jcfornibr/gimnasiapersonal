@@ -344,7 +344,7 @@ export const MyDocumentPDF = ({ rutina }) => {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Rutina de Entrenamiento</Text>
-          <Text style={styles.headerSubtitle}>Entrename IÁ</Text>
+          <Text style={styles.headerSubtitle}> IÁ</Text>
         </View>
 
         {/* Main Content */}
@@ -387,7 +387,7 @@ export const MyDocumentPDF = ({ rutina }) => {
 
         {/* Footer */}
         <View style={styles.footer}>
-          <Text>© 2026 Entrename IÁ - Rutina personalizada generada con Inteligencia Artificial</Text>
+          <Text>© 2026 RepWise Fit - Rutina personalizada generada con Inteligencia Artificial</Text>
           <Text style={{ marginTop: 3 }}>Consulta a un profesional antes de comenzar cualquier programa de entrenamiento</Text>
         </View>
       </Page>

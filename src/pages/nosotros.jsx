@@ -121,7 +121,7 @@ export const Nosotros = () => {
 
             <div className="mt-12 pt-8 border-t border-white/5 text-center">
               <p className="text-2xl font-bold text-white mb-2">
-                Bienvenido a <span className="text-red-500">EntrenameIÁ!</span>
+                Bienvenido a <span className="text-red-500">RepWise Fit!</span>
               </p>
               <p className="text-gray-400 text-sm">
                 La revolución del fitness está en tus manos.
@@ -129,7 +129,7 @@ export const Nosotros = () => {
               <p className="text-gray-500 text-xs mt-6">
                 Desarrollado por{" "}
                 <a 
-                  href="https://nomossolutions.com" 
+                  href="https://nomos-solutions.vercel.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 font-semibold hover:text-red-500 transition-colors"

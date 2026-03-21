@@ -11,7 +11,7 @@ export function NavigateApp({ auth, logIn, logOut }) {
       <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#121113] backdrop-blur-md px-6 lg:px-20 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <NavLink to="/" className="flex items-center space-x-3">
-            <h2 className="text-white text-xl font-bold leading-tight tracking-tight">Entrename <span className="text-red-500 text-sm uppercase tracking-widest">IÁ</span></h2>
+            <h2 className="text-white text-xl font-bold leading-tight tracking-tight">RepWise <span className="text-red-500 text-sm uppercase tracking-widest">Fit</span></h2>
           </NavLink>
 
           <div className="hidden md:flex items-center gap-10">
