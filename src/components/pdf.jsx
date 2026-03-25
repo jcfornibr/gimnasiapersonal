@@ -1,395 +1,428 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
-// Create styles
+/* =======================
+   🎨 STYLES
+======================= */
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'column',
-    backgroundColor: '#ffffff',
     padding: 40,
     fontFamily: 'Helvetica',
+    backgroundColor: '#ffffff', // blanco (fondo general)
   },
-  mainTitle: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#2563eb',
+
+  header: {
     marginBottom: 20,
-    paddingBottom: 15,
-    borderBottom: '3 solid #2563eb',
+    paddingBottom: 12,
+    borderBottomWidth: 3,
+    borderBottomColor: '#dc2626', // borde rojo como en web
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1f2937', // gris muy oscuro
+  },
+  headerSubtitle: {
+    fontSize: 12,
+    color: '#6b7280', // gris medio
+    marginTop: 6,
+    letterSpacing: 0.5,
     textTransform: 'uppercase',
-    letterSpacing: 1.5,
-    textAlign: 'center',
+  },
+
+  mainTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#1f2937', // gris muy oscuro (título principal)
+    marginTop: 10,
+    marginBottom: 10,
+    paddingBottom: 8,
+    borderBottomWidth: 2,
+    borderBottomColor: '#dc2626', // borde rojo como en web
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#ffffff',
-    backgroundColor: '#2563eb',
-    marginTop: 25,
-    marginBottom: 15,
-    padding: 12,
-    paddingLeft: 20,
-    borderRadius: 5,
+    color: '#f59e0b', // naranja/amarillo oscuro (como h2 en web)
+    marginTop: 16,
+    marginBottom: 10,
   },
   subsectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#2563eb',
-    marginTop: 20,
-    marginBottom: 10,
-    paddingBottom: 6,
-    borderBottom: '2 solid #dbeafe',
-  },
-  text: {
-    fontSize: 12,
-    lineHeight: 1.9,
-    color: '#374151',
+    color: '#3b82f6', // azul (como h3 en web)
+    marginTop: 12,
     marginBottom: 8,
   },
-  boldText: {
-    fontSize: 12,
+  
+  subsubsectionTitle: {
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: '#8b5cf6', // púrpura (como h4 en web)
+    marginTop: 10,
+    marginBottom: 6,
   },
+
+  text: {
+    fontSize: 13,
+    lineHeight: 1.7,
+    color: '#4b5563', // gris oscuro (texto normal)
+    marginBottom: 8,
+  },
+
+  textBlock: {
+    marginBottom: 6,
+  },
+  
+  strongText: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#f59e0b', // amarillo/naranja (como strong en web)
+    lineHeight: 1.7,
+  },
+
   exerciseItem: {
-    marginBottom: 15,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 12,
-    paddingBottom: 12,
-    backgroundColor: '#f8fafc',
-    borderLeft: '5 solid #2563eb',
-    borderRadius: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    padding: 10,
+    marginBottom: 10,
+    marginTop: 6,
+    backgroundColor: '#fef2f2', // fondo rojo muy claro
+    borderLeftWidth: 4,
+    borderLeftColor: '#ef4444', // rojo (como en web)
+    borderRadius: 3,
   },
   exerciseName: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#2563eb',
-    marginBottom: 6,
+    color: '#3b82f6', // azul para nombres de ejercicio
+    marginBottom: 4,
   },
   exerciseDetails: {
-    fontSize: 11,
-    color: '#4b5563',
-    lineHeight: 1.7,
+    fontSize: 12,
+    color: '#6b7280', // gris medio
+    fontStyle: 'italic',
+    marginTop: 2,
   },
+
+  listItem: {
+    fontSize: 13,
+    marginBottom: 6,
+    marginLeft: 12,
+    color: '#4b5563', // gris oscuro
+    lineHeight: 1.6,
+  },
+  
+  listMarker: {
+    color: '#ef4444', // marcador rojo (como en web)
+  },
+
   table: {
-    marginTop: 15,
-    marginBottom: 20,
-    border: '2 solid #2563eb',
-    borderRadius: 6,
+    marginTop: 12,
+    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: '#d1d5db', // borde gris claro
+    borderRadius: 4,
     overflow: 'hidden',
   },
   tableRow: {
     flexDirection: 'row',
   },
   tableRowEven: {
-    backgroundColor: '#f1f5f9',
-  },
-  tableCell: {
-    flex: 1,
-    padding: 10,
-    borderRight: '1 solid #cbd5e1',
-    borderBottom: '1 solid #cbd5e1',
-    fontSize: 11,
-    color: '#374151',
+    backgroundColor: '#f9fafb', // gris muy claro (filas alternadas)
   },
   tableHeader: {
-    backgroundColor: '#2563eb',
-    color: '#ffffff',
-    fontWeight: 'bold',
-    fontSize: 12,
-    padding: 12,
-  },
-  header: {
-    marginBottom: 25,
-    paddingBottom: 20,
-    borderBottom: '2 solid #dc2626',
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#1f2937',
-    marginBottom: 8,
-  },
-  headerSubtitle: {
-    fontSize: 12,
-    color: '#dc2626',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  infoCard: {
-    backgroundColor: '#fef2f2',
-    padding: 12,
-    marginBottom: 15,
-    borderLeft: '3 solid #dc2626',
-  },
-  infoLabel: {
-    fontSize: 9,
-    color: '#6b7280',
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-    marginBottom: 3,
-  },
-  infoValue: {
     fontSize: 11,
-    color: '#1f2937',
     fontWeight: 'bold',
+    backgroundColor: '#ef4444', // rojo (como en web)
+    color: '#ffffff', // blanco
+    paddingVertical: 8,
+    paddingHorizontal: 8,
+    flex: 1,
   },
+  tableCell: {
+    fontSize: 11,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
+    flex: 1,
+    color: '#4b5563', // gris oscuro
+    borderTopWidth: 1,
+    borderTopColor: '#e5e7eb', // líneas suaves
+  },
+
+  divider: {
+    height: 2,
+    backgroundColor: '#e5e7eb', // gris claro (separador como hr en web)
+    marginVertical: 14,
+  },
+
+  codeBlock: {
+    padding: 10,
+    marginVertical: 8,
+    backgroundColor: '#f9fafb', // fondo gris claro
+    borderLeftWidth: 4,
+    borderLeftColor: '#ef4444', // borde rojo (como pre en web)
+    borderRadius: 3,
+  },
+  codeText: {
+    fontSize: 11,
+    color: '#1f2937', // texto oscuro
+    fontFamily: 'Courier',
+    lineHeight: 1.5,
+  },
+  
+  blockquote: {
+    padding: 10,
+    marginVertical: 8,
+    backgroundColor: '#fefce8', // fondo amarillo muy claro
+    borderLeftWidth: 4,
+    borderLeftColor: '#fbbf24', // borde amarillo (como en web)
+    borderRadius: 3,
+  },
+  blockquoteText: {
+    fontSize: 12,
+    color: '#6b7280', // gris medio
+    fontStyle: 'italic',
+    lineHeight: 1.6,
+  },
+
   footer: {
     position: 'absolute',
-    bottom: 30,
-    left: 30,
-    right: 30,
-    paddingTop: 15,
-    borderTop: '1 solid #e5e7eb',
-    textAlign: 'center',
+    bottom: 20,
+    left: 36,
+    right: 36,
+    borderTopWidth: 1,
+    borderTopColor: '#e5e7eb', // borde suave
+    paddingTop: 8,
     fontSize: 9,
-    color: '#9ca3af',
-  },
-  motivationalQuote: {
-    backgroundColor: '#fef2f2',
-    padding: 15,
-    marginTop: 20,
-    marginBottom: 15,
-    borderLeft: '3 dashed #dc2626',
-    borderRight: '3 dashed #dc2626',
-  },
-  quoteText: {
-    fontSize: 11,
-    color: '#dc2626',
-    fontStyle: 'italic',
+    color: '#9ca3af', // gris claro
     textAlign: 'center',
   },
 });
 
-// Function to parse markdown and clean formatting
-const parseMarkdownLine = (line) => {
-  if (!line) return null;
+/* =======================
+   🧹 CLEAN MARKDOWN
+======================= */
+const clean = (text = '') =>
+  text
+    .replace(/\*\*/g, '')
+    .replace(/\*/g, '')
+    .replace(/`/g, '')
+    .replace(/~/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .trim();
 
-  // Table row detection (Markdown pipe table)
-  // A table row starts and ends with a pipe and has at least one pipe inside.
-  const tableMatch = line.trim().match(/^\|.*\|$/);
-  if (tableMatch) {
-    // Split on pipes, discard leading/trailing empty strings
-    const cells = line
-      .split('|')
-      .slice(1, -1)
-      .map((c) => c.trim());
+/* =======================
+   🔍 HELPERS
+======================= */
+const isExerciseDetail = (text) =>
+  /serie|repeticion|descanso|tiempo|set|rep|seg|kg/i.test(text);
 
-    // Determine if this is a separator row ("|:----|----:|")
-    const isSeparator = cells.every((c) => /^:?-+:?$/.test(c));
-    if (isSeparator) {
-      return { type: 'tableSeparator' };
-    }
+const isExerciseTitle = (text) =>
+  text.length < 60 && !text.includes(':');
 
-    return { type: 'tableRow', cells };
-  }
+/* =======================
+   🧠 PARSER
+======================= */
+const parseMarkdown = (rutina) => {
+  const lines = rutina.split('\n').filter((l) => l.trim());
 
-  // Count leading # for heading level
-  const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
-  if (headingMatch) {
-    const level = headingMatch[1].length;
-    const text = headingMatch[2].replace(/\*/g, ''); // Remove asterisks
-    return { type: 'heading', level, text };
-  }
-
-  // Fallback: treat as plain text
-  return { type: 'text', text: line };
-};
-
-// Helper to render inline markdown-like styles inside a text string
-const renderInlineText = (text) => {
-  // strip leftover single asterisks
-  let clean = text.replace(/\*(?!\*)([^*]+)\*(?!\*)/g, '$1');
-
-  // split by bold markers ** **
-  const parts = [];
-  let remaining = clean;
-  const boldRegex = /\*\*(.+?)\*\*/;
-
-  while (true) {
-    const match = remaining.match(boldRegex);
-    if (!match) break;
-    const [full, inner] = match;
-    const index = remaining.indexOf(full);
-    if (index > 0) {
-      parts.push(<Text key={parts.length}>{remaining.slice(0, index)}</Text>);
-    }
-    parts.push(
-      <Text key={parts.length} style={styles.boldText}>
-        {inner}
-      </Text>
-    );
-    remaining = remaining.slice(index + full.length);
-  }
-  if (remaining) parts.push(<Text key={parts.length}>{remaining}</Text>);
-  return parts;
-};
-
-// Function to render content based on parsed markdown
-const renderContent = (line, index) => {
-  const parsed = parseMarkdownLine(line);
-  
-  if (!parsed) return null;
-
-  // Handle table rows separately
-  if (parsed.type === 'tableRow' || parsed.type === 'tableSeparator') {
-    return null; // Tables are handled in the main render
-  }
-
-  if (!parsed.text || !parsed.text.trim()) return null;
-  
-  const text = parsed.text.replace(/\*/g, '').trim(); // Remove asterisks from headings/text
-
-  switch (parsed.type) {
-    case 'heading':
-      if (parsed.level === 1) {
-        return (
-          <Text key={index} style={styles.mainTitle}>
-            {text}
-          </Text>
-        );
-      } else if (parsed.level === 2) {
-        return (
-          <Text key={index} style={styles.sectionTitle}>
-            {text}
-          </Text>
-        );
-      } else if (parsed.level === 3) {
-        return (
-          <Text key={index} style={styles.subsectionTitle}>
-            {text}
-          </Text>
-        );
-      } else if (parsed.level === 4) {
-        return (
-          <View key={index} style={styles.exerciseItem}>
-            <Text style={styles.exerciseName}>{text}</Text>
-          </View>
-        );
-      }
-      return (
-        <Text key={index} style={styles.text}>
-          {text}
-        </Text>
-      );
-    case 'text':
-      // Check if it looks like exercise details (contains "series", "repeticiones", etc.)
-      if (text.match(/serie|repeticion|descanso|tiempo|set|rep/i)) {
-        return (
-          <Text key={index} style={styles.exerciseDetails}>
-            {text}
-          </Text>
-        );
-      }
-      return (
-        <Text key={index} style={styles.text}>
-          {text}
-        </Text>
-      );
-    default:
-      return null;
-  }
-};
-
-// Create Document Component
-export const MyDocumentPDF = ({ rutina }) => {
-  // Split the rutina into lines and parse each one
-  const lines = rutina.split('\n').filter(line => line.trim());
-
-  // Group table rows
   const content = [];
   let tableRows = [];
   let inTable = false;
 
-  lines.forEach((line, index) => {
-    const parsed = parseMarkdownLine(line);
-    if (!parsed) return;
+  lines.forEach((line) => {
+    const trimmed = line.trim();
 
-    if (parsed.type === 'tableRow') {
-      if (!inTable) {
-        inTable = true;
-        tableRows = [];
-      }
-      tableRows.push(parsed);
-    } else if (parsed.type === 'tableSeparator') {
-      // separator row just indicates alignment and belongs to current table
-      // do not output it, but ensure we are in table mode so later rows join
-      if (!inTable) {
-        inTable = true;
-        tableRows = [];
-      }
-    } else {
+    // ✅ DIVIDER (--- *** ___)
+    if (/^[-*_]{3,}$/.test(trimmed)) {
       if (inTable) {
         content.push({ type: 'table', rows: tableRows });
-        inTable = false;
         tableRows = [];
+        inTable = false;
       }
-      content.push({ ...parsed, index });
+      content.push({ type: 'divider' });
+      return;
     }
+
+    // TABLE
+    if (/^\|.*\|$/.test(trimmed)) {
+      const cells = trimmed
+        .split('|')
+        .slice(1, -1)
+        .map((c) => clean(c));
+
+      if (!cells.every((c) => /^:?-+:?$/.test(c))) {
+        inTable = true;
+        tableRows.push(cells);
+      }
+      return;
+    }
+
+    // CLOSE TABLE
+    if (inTable) {
+      content.push({ type: 'table', rows: tableRows });
+      tableRows = [];
+      inTable = false;
+    }
+
+    // HEADINGS
+    const h = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (h) {
+      content.push({
+        type: 'heading',
+        level: h[1].length,
+        text: clean(h[2]),
+      });
+      return;
+    }
+
+    // LIST
+    const list = trimmed.match(/^[-*]\s+(.+)$/);
+    if (list) {
+      content.push({ type: 'list', text: clean(list[1]) });
+      return;
+    }
+
+    // TEXT
+    content.push({ type: 'text', text: clean(trimmed) });
   });
 
   if (inTable) {
     content.push({ type: 'table', rows: tableRows });
   }
 
+  return content;
+};
+
+/* =======================
+   🎯 RENDER
+======================= */
+const renderItem = (item, index) => {
+  if (!item) return null;
+
+  if (item.type === 'divider') {
+    return <View key={index} style={styles.divider} />;
+  }
+
+  if (item.type === 'heading') {
+    if (item.level === 1) {
+      return <Text key={index} style={styles.mainTitle}>{item.text}</Text>;
+    }
+
+    if (item.level === 2) {
+      return <Text key={index} style={styles.sectionTitle}>{item.text}</Text>;
+    }
+
+    if (item.level === 3) {
+      // Si es un título de ejercicio, usar tarjeta especial
+      if (isExerciseTitle(item.text)) {
+        return (
+          <View key={index} wrap={false} style={styles.exerciseItem}>
+            <Text style={styles.exerciseName}>{item.text}</Text>
+          </View>
+        );
+      }
+      return <Text key={index} style={styles.subsectionTitle}>{item.text}</Text>;
+    }
+
+    // H4 y siguientes en púrpura
+    return <Text key={index} style={styles.subsubsectionTitle}>{item.text}</Text>;
+  }
+
+  if (item.type === 'list') {
+    return (
+      <View 
+        key={index} 
+        wrap={false}
+        style={{ flexDirection: 'row', marginBottom: 6, marginLeft: 12 }}
+      >
+        <Text style={{ color: '#ef4444', marginRight: 6 }}>•</Text>
+        <Text style={styles.listItem}>{item.text}</Text>
+      </View>
+    );
+  }
+
+  if (item.type === 'text') {
+    if (isExerciseDetail(item.text)) {
+      return (
+        <View 
+          key={index} 
+          wrap={false}
+          style={{ 
+            paddingVertical: 4, 
+            paddingHorizontal: 10,
+            marginBottom: 5,
+            marginLeft: 10,
+          }}
+        >
+          <Text style={styles.exerciseDetails}>
+            {item.text}
+          </Text>
+        </View>
+      );
+    }
+
+    return (
+      <View key={index} wrap={false} style={styles.textBlock}>
+        <Text style={styles.text}>{item.text}</Text>
+      </View>
+    );
+  }
+
+  if (item.type === 'table') {
+    return (
+      <View key={index} style={styles.table}>
+        {item.rows.map((row, rIdx) => (
+          <View
+            key={rIdx}
+            style={[
+              styles.tableRow,
+              rIdx % 2 === 1 && styles.tableRowEven,
+            ]}
+          >
+            {row.map((cell, cIdx) => (
+              <Text
+                key={cIdx}
+                style={rIdx === 0 ? styles.tableHeader : styles.tableCell}
+              >
+                {cell}
+              </Text>
+            ))}
+          </View>
+        ))}
+      </View>
+    );
+  }
+
+  return null;
+};
+
+/* =======================
+   📄 MAIN COMPONENT
+======================= */
+export const MyDocumentPDF = ({ rutina }) => {
+  const content = parseMarkdown(rutina);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header */}
+        
+        {/* HEADER */}
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Rutina de Entrenamiento</Text>
-          <Text style={styles.headerSubtitle}> IÁ</Text>
+          <Text style={styles.headerTitle}>Plan de Entrenamiento</Text>
+          <Text style={styles.headerSubtitle}>RepWise Fitness</Text>
         </View>
 
-        {/* Main Content */}
+        {/* CONTENT */}
         <View>
-          {content.map((item, index) => {
-            if (item.type === 'table') {
-              return (
-                <View key={index} style={styles.table}>
-                  {item.rows.map((row, rowIndex) => (
-                    <View
-                      key={rowIndex}
-                      style={[
-                        styles.tableRow,
-                        rowIndex % 2 === 1 && rowIndex !== 0 ? styles.tableRowEven : {},
-                      ]}
-                    >
-                      {row.cells.map((cell, cellIndex) => (
-                        <Text
-                          key={cellIndex}
-                          style={[
-                            styles.tableCell,
-                            rowIndex === 0 ? styles.tableHeader : {},
-                          ]}
-                        >
-                          {cell}
-                        </Text>
-                      ))}
-                    </View>
-                  ))}
-                </View>
-              );
-            } else {
-              return renderContent(item.text, item.index);
-            }
-          })}
+          {content.map((item, index) => renderItem(item, index))}
         </View>
 
-        
-        
-
-        {/* Footer */}
+        {/* FOOTER */}
         <View style={styles.footer}>
-          <Text>© 2026 RepWise Fit - Rutina personalizada generada con Inteligencia Artificial</Text>
-          <Text style={{ marginTop: 3 }}>Consulta a un profesional antes de comenzar cualquier programa de entrenamiento</Text>
+          <Text>© 2026 RepWise Fit - Rutina generada con IA</Text>
+          <Text>Consulta a un profesional antes de entrenar</Text>
         </View>
+
       </Page>
     </Document>
   );
