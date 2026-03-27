@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GymExerciseIA } from '../helpers/configIa';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import '../styles/exercises.css';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import { MyDocumentPDF } from '../components/pdf';
 import { 
   MdMale, 
@@ -21,7 +21,10 @@ import {
   MdSync, 
   MdPictureAsPdf, 
   MdCalendarMonth, 
-  MdTrendingUp 
+  MdTrendingUp,
+  MdPreview,
+  MdDescription,
+  MdDelete
 } from 'react-icons/md';
 
 export const GymExercise = () => {
@@ -33,6 +36,35 @@ export const GymExercise = () => {
   const [nivel, setNivel] = useState('');
   const [aparatos, setAparatos] = useState('');
   const [objetivo, setObjetivo] = useState('');
+  const [showPdfPreview, setShowPdfPreview] = useState(false);
+
+  // Cargar estado guardado al montar el componente
+  useEffect(() => {
+    const savedData = localStorage.getItem('gymExerciseData');
+    if (savedData) {
+      try {
+        const parsed = JSON.parse(savedData);
+        setEjercicios(parsed.ejercicios || '');
+        setFormData(parsed.formData || {});
+        setSexo(parsed.formData?.sexo || '');
+        setNivel(parsed.formData?.nivel || '');
+        setAparatos(parsed.formData?.aparatos || '');
+        setObjetivo(parsed.formData?.objetivo || '');
+      } catch (error) {
+        console.error('Error al cargar datos guardados:', error);
+      }
+    }
+  }, []);
+
+  // Guardar automáticamente cuando cambia la rutina
+  useEffect(() => {
+    if (ejercicios && formData) {
+      localStorage.setItem('gymExerciseData', JSON.stringify({
+        ejercicios,
+        formData
+      }));
+    }
+  }, [ejercicios, formData]);
 
   async function presion(e) {
     e.preventDefault();
@@ -59,6 +91,19 @@ export const GymExercise = () => {
 
     setIsLoading(false);
   }
+
+  const limpiarTodo = () => {
+    if (confirm('¿Estás seguro de que quieres limpiar la rutina guardada?')) {
+      localStorage.removeItem('gymExerciseData');
+      setEjercicios('');
+      setFormData({});
+      setSexo('');
+      setNivel('');
+      setAparatos('');
+      setObjetivo('');
+      setShowPdfPreview(false);
+    }
+  };
 
   return (
     <>
@@ -343,7 +388,7 @@ export const GymExercise = () => {
                     id="lesion"
                     placeholder="Ej: lesión de meniscos"
                     className="w-full rounded bg-zinc-800 border border-red-600/20 text-gray-100 focus:ring-red-600 focus:border-red-600 h-12 px-4 placeholder:text-gray-500"
-                    required
+                    
                   />
                 </div>
 
@@ -397,40 +442,93 @@ export const GymExercise = () => {
               )}
 
               {/* Exercise List */}
-              <div className="flex-1 p-6 flex flex-col gap-4 custom-scrollbar overflow-y-auto max-h-125">
-                {isLoading ? (
-                  <div className="flex flex-col justify-center items-center gap-4 text-white h-full">
-
-                    <span className="inline-block w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin" role="status" aria-hidden="true"></span>
-                    <span className="text-lg font-semibold">Generando tu rutina personalizada...</span>
-                  </div>
-                ) : ejercicios ? (
-                  <>
-                    <div className="markdown-content">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{ejercicios}</ReactMarkdown>
-                    </div>
-
-                    <div className="bg-red-600/5 p-4 rounded-lg border border-dashed border-red-600/30 text-center mt-4">
-                      <p className="text-red-600 text-sm italic">
-                        "No te detengas cuando estés cansado. Detente cuando hayas terminado."
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <div className="flex flex-col items-center justify-center h-full text-gray-400 text-center gap-4">
-                    <MdPendingActions className="text-6xl text-gray-600" />
-                    <p className="text-lg">Completa el formulario y genera tu rutina personalizada</p>
+              <div className="flex-1 p-6 flex flex-col gap-4">
+                {/* Toggle View Buttons */}
+                {ejercicios && !isLoading && (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setShowPdfPreview(false)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer transition-all ${
+                        !showPdfPreview
+                          ? 'bg-red-600 text-white'
+                          : 'bg-zinc-800 text-gray-400 hover:bg-zinc-700'
+                      }`}
+                    >
+                      <MdDescription className="text-lg" />
+                      Markdown
+                    </button>
+                    <button
+                      onClick={() => setShowPdfPreview(true)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer transition-all ${
+                        showPdfPreview
+                          ? 'bg-red-600 text-white'
+                          : 'bg-zinc-800 text-gray-400 hover:bg-zinc-700'
+                      }`}
+                    >
+                      <MdPreview className="text-lg" />
+                      Vista Previa PDF
+                    </button>
                   </div>
                 )}
+
+                {/* Contenido con scroll */}
+                <div className={`custom-scrollbar overflow-y-auto ${ejercicios && !isLoading ? 'max-h-125' : 'h-full'}`}>
+                  {isLoading ? (
+                    <div className="flex flex-col justify-center items-center gap-4 text-white h-full min-h-96">
+                      <span className="inline-block w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin" role="status" aria-hidden="true"></span>
+                      <span className="text-lg font-semibold">Generando tu rutina personalizada...</span>
+                    </div>
+                  ) : ejercicios ? (
+                    <>
+                      {showPdfPreview ? (
+                        <div className="w-full flex flex-col gap-4">
+                          {/* Mensaje informativo */}
+                         
+                          
+                          <PDFViewer width="100%" height="600px" className="rounded-lg border border-zinc-700">
+                            <MyDocumentPDF rutina={ejercicios} />
+                          </PDFViewer>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="markdown-content">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{ejercicios}</ReactMarkdown>
+                          </div>
+
+                          <div className="bg-red-600/5 p-4 rounded-lg border border-dashed border-red-600/30 text-center mt-4">
+                            <p className="text-red-600 text-sm italic">
+                              "No te detengas cuando estés cansado. Detente cuando hayas terminado."
+                            </p>
+                          </div>
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-full text-gray-400 text-center gap-4 min-h-96">
+                      <MdPendingActions className="text-6xl text-gray-600" />
+                      <p className="text-lg">Completa el formulario y genera tu rutina personalizada</p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Action Footer */}
               {ejercicios && !isLoading && (
                 <div className="p-6 border-t border-red-600/10 bg-zinc-900 flex flex-col sm:flex-row gap-4 items-center justify-between">
                   <div className="flex gap-2">
-
+                    <button
+                      onClick={limpiarTodo}
+                      className="bg-zinc-800 hover:bg-zinc-700 text-gray-400 hover:text-red-600 font-bold py-3 px-6 rounded flex items-center justify-center gap-2 cursor-pointer transition-all"
+                      title="Limpiar rutina guardada"
+                    >
+                      <MdDelete className="text-xl" />
+                      Limpiar
+                    </button>
                   </div>
-                  <PDFDownloadLink document={<MyDocumentPDF rutina={ejercicios} />} fileName='rutina_ejercicios.pdf'>
+                  <PDFDownloadLink 
+                    document={<MyDocumentPDF rutina={ejercicios} />} 
+                    fileName={`Rutina_${formData.nombreAlumno?.replace(/\s+/g, '_') || 'Plan'}_${new Date().toISOString().split('T')[0]}.pdf`}
+                  >
                     {({ loading }) => loading ?
                       <button className="w-full sm:w-auto bg-zinc-800 text-gray-400 font-bold py-3 px-8 rounded flex items-center justify-center gap-2 transition-all cursor-wait">
                         <MdSync className="animate-spin text-xl" />
