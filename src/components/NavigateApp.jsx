@@ -1,10 +1,21 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/header.css";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { useAuth } from "../auth/useAuth";
 
-export function NavigateApp({ auth, logIn, logOut }) {
+export function NavigateApp() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAuth = async () => {
+    if (user) {
+      await signOut();
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
     <>
@@ -43,7 +54,7 @@ export function NavigateApp({ auth, logIn, logOut }) {
               Contacto
             </NavLink>
 
-            {auth && (
+            {user && (
               <NavLink
                 to="/admin"
                 className="text-sm font-medium hover:text-red-500 transition-colors text-white/80"
@@ -53,10 +64,10 @@ export function NavigateApp({ auth, logIn, logOut }) {
             )}
 
             <button
-              onClick={() => (auth ? logOut() : logIn())}
+              onClick={handleAuth}
               className="bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-2 rounded transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
             >
-              {auth ? "Log Out" : "Log In"}
+              {user ? "Log Out" : "Log In"}
             </button>
           </div>
 
@@ -107,7 +118,7 @@ export function NavigateApp({ auth, logIn, logOut }) {
                 Contacto
               </NavLink>
 
-              {auth && (
+              {user && (
                 <NavLink
                   to="/admin"
                   className="text-sm font-medium text-white/80 hover:text-red-500 py-2 px-3 rounded transition-colors"
@@ -121,12 +132,12 @@ export function NavigateApp({ auth, logIn, logOut }) {
               <div className="border-t border-white/10 pt-4 mt-2">
                 <button
                   onClick={() => {
-                    auth ? logOut() : logIn();
+                    handleAuth();
                     setMenuOpen(false);
                   }}
                   className="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-2 rounded transition-all transform hover:scale-105 active:scale-95"
                 >
-                  {auth ? "Log Out" : "Log In"}
+                  {user ? "Log Out" : "Log In"}
                 </button>
               </div>
             </div>
